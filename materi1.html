@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الدرس الأول - مفهوم الجملة الفعلية</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+    /* Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+    body {
+      background: #f0f4f8;
+      color: #102a43;
+      min-height: 100vh;
+      line-height: 1.6;
+      padding: 1rem 1.5rem 3rem;
+      max-width: 900px;
+      margin: auto;
+    }
+    a {
+      color: #0a9396;
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+    a:hover,
+    a:focus {
+      color: #005f73;
+      outline: none;
+    }
+    h1, h2, h3 {
+      color: #0a9396;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      border-bottom: 3px solid #0a9396;
+      padding-bottom: 0.3rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #005f73;
+    }
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+    }
+
+    /* Pendahuluan dengan ikon */
+    .intro {
+      background: #caf0f8;
+      border-radius: 15px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 6px 15px rgb(10 147 150 / 0.3);
+      margin-bottom: 2rem;
+    }
+    .intro svg {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+      fill: #0a9396;
+    }
+    .intro-text {
+      font-size: 1.2rem;
+      color: #005f73;
+      text-align: justify;
+    }
+
+    /* Tabel mufrodat */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead {
+      background: #0a9396;
+      color: #caf0f8;
+      font-weight: 700;
+    }
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #e0e6ed;
+      font-size: 1rem;
+    }
+    tbody tr:hover {
+      background: #e0f7fa;
+    }
+
+    /* Highlight box untuk konsep dan contoh */
+    .highlight-box {
+      background: #ee9b00;
+      color: #001219;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 8px 20px rgb(238 155 0 / 0.7);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .highlight-box p {
+      margin-bottom: 0.8rem;
+    }
+    .example {
+      background: #fff3d4;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 0.8rem 0 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #7a4f01;
+      box-shadow: inset 0 0 8px rgb(122 79 1 / 0.3);
+      line-height: 1.4;
+    }
+    .example-arab {
+      font-size: 1.4rem;
+      font-weight: 700;
+      direction: rtl;
+      margin-bottom: 0.3rem;
+      color: #5a3e01;
+    }
+    .example-tr {
+      font-style: italic;
+      color: #7a4f01;
+    }
+
+    /* Latihan interaktif */
+    .exercise-section {
+      margin-top: 3rem;
+    }
+    .exercise-section h2 {
+      margin-bottom: 1rem;
+    }
+    .quiz, .dragdrop {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .quiz h3, .dragdrop h3 {
+      color: #0a9396;
+      margin-bottom: 1rem;
+    }
+    .quiz-question {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .options li {
+      margin-bottom: 0.6rem;
+    }
+    .options label {
+      cursor: pointer;
+      user-select: none;
+      font-size: 1rem;
+      color: #102a43;
+      background: #e0f7fa;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+    .options input[type="radio"] {
+      display: none;
+    }
+    .options input[type="radio"]:checked + label {
+      background-color: #0a9396;
+      color: #caf0f8;
+      font-weight: 700;
+    }
+    button.check-btn {
+      margin-top: 1rem;
+      background: #0a9396;
+      color: #caf0f8;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.check-btn:hover,
+    button.check-btn:focus {
+      background: #005f73;
+      outline: none;
+    }
+    .feedback {
+      margin-top: 0.8rem;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .correct {
+      color: #2d6a4f;
+    }
+    .wrong {
+      color: #b00020;
+    }
+
+    /* Drag & Drop */
+    .dragdrop-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .drag-item, .drop-zone {
+      background: #caf0f8;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #005f73;
+      user-select: none;
+      box-shadow: 0 4px 10px rgb(10 147 150 / 0.3);
+      min-width: 120px;
+      text-align: center;
+      cursor: grab;
+    }
+    .drag-item:active {
+      cursor: grabbing;
+    }
+    .drop-zone {
+      background: #e0f7fa;
+      border: 2px dashed #0a9396;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #0a9396;
+    }
+    .drop-zone.filled {
+      border-style: solid;
+      background: #0a9396;
+      color: #caf0f8;
+      font-weight: 700;
+      box-shadow: 0 6px 15px rgb(10 147 150 / 0.7);
+    }
+    .dragdrop-instruction {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      color: #005f73;
+      text-align: center;
+    }
+
+    /* Evaluasi Akhir */
+    .final-quiz {
+      background: #fff;
+      border-radius: 15px;
+      padding: 2rem 2.5rem;
+      box-shadow: 0 8px 20px rgb(0 0 0 / 0.1);
+      margin-top: 3rem;
+    }
+    .final-quiz h2 {
+      color: #0a9396;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .score {
+      font-size: 1.3rem;
+      font-weight: 700;
+      margin-top: 1rem;
+      text-align: center;
+      color: #2d6a4f;
+    }
+    .btn-submit {
+      background: #ee9b00;
+      color: #001219;
+      border: none;
+      padding: 0.8rem 2rem;
+      border-radius: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      display: block;
+      margin: 1.5rem auto 0;
+      transition: background-color 0.3s ease;
+    }
+    .btn-submit:hover,
+    .btn-submit:focus {
+      background: #d17a00;
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .intro {
+        flex-direction: column;
+        text-align: center;
+      }
+      .intro svg {
+        margin: 0 auto;
+      }
+      .dragdrop-container {
+        flex-direction: column;
+        align-items: center;
+      }
+      .drag-item, .drop-zone {
+        min-width: 80%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h1>Pelajaran 1: Konsep Jumlah Fi‘liyah (الجملة الفعلية)</h1>
+
+  <!-- Pendahuluan -->
+  <section class="intro" aria-label="Pendahuluan pelajaran">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 64 64" >
+      <path d="M32 2a30 30 0 1 0 30 30A30.034 30.034 0 0 0 32 2Zm0 56a26 26 0 1 1 26-26 26.03 26.03 0 0 1-26 26Z"/>
+      <path d="M32 14a18 18 0 1 0 18 18A18.02 18.02 0 0 0 32 14Zm0 32a14 14 0 1 1 14-14 14.016 14.016 0 0 1-14 14Z"/>
+      <path d="M32 22a10 10 0 1 0 10 10 10.011 10.011 0 0 0-10-10Zm0 16a6 6 0 1 1 6-6 6.007 6.007 0 0 1-6 6Z"/>
+    </svg>
+    <p class="intro-text">
+      Pada pelajaran ini, kita akan mempelajari konsep <strong>Jumlah Fi‘liyah</strong> dalam bahasa Arab, yaitu kalimat yang diawali dengan kata kerja (fi‘il). Kita akan memahami strukturnya, contoh kalimat, serta kosakata yang berkaitan dengan aktivitas sehari-hari di rumah.
+    </p>
+  </section>
+
+  <!-- Mufrodat kosa-kata -->
+  <section aria-labelledby="mufrodat-title">
+    <h2 id="mufrodat-title">Kosakata: Kegiatan Sehari-hari di Rumah</h2>
+    <p>Berikut adalah daftar kosakata beserta artinya dalam bahasa Indonesia.</p>
+    <table>
+      <thead>
+        <tr>
+          <th>Kata Arab (Isim)</th>
+          <th>Arti (Bahasa Indonesia)</th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- Isim -->
+        <tr><td>بَيْتٌ</td><td>rumah</td></tr>
+        <tr><td>غُرْفَةٌ</td><td>kamar</td></tr>
+        <tr><td>سَرِيرٌ</td><td>tempat tidur</td></tr>
+        <tr><td>مَطْبَخٌ</td><td>dapur</td></tr>
+        <tr><td>مَائِدَةٌ</td><td>meja makan</td></tr>
+        <tr><td>كُرْسِيٌّ</td><td>kursi</td></tr>
+        <tr><td>كِتَابٌ</td><td>buku</td></tr>
+        <tr><td>دَرْسٌ</td><td>pelajaran</td></tr>
+        <tr><td>طَعَامٌ</td><td>makanan</td></tr>
+        <tr><td>قَهْوَةٌ</td><td>kopi</td></tr>
+        <tr><td>مَاءٌ</td><td>air</td></tr>
+        <tr><td>صَحْنٌ</td><td>piring</td></tr>
+        <tr><td>كَأْسٌ</td><td>gelas</td></tr>
+        <tr><td>ثَوْبٌ</td><td>baju</td></tr>
+        <tr><td>مَكْنَسَةٌ</td><td>sapu</td></tr>
+        <tr><td>حَدِيقَةٌ</td><td>kebun/halaman</td></tr>
+        <tr><td>سَاعَةٌ</td><td>jam</td></tr>
+        <tr><td>بِنْتٌ</td><td>anak perempuan</td></tr>
+        <tr><td>وَلَدٌ</td><td>anak laki-laki</td></tr>
+        <tr><td>أَبٌ</td><td>ayah</td></tr>
+        <tr><td>أُمٌّ</td><td>ibu</td></tr>
+        <tr><td>أَخٌ</td><td>saudara laki-laki</td></tr>
+        <tr><td>أُخْتٌ</td><td>saudara perempuan</td></tr>
+        
+		<thead>
+        <tr>
+          <th>Kata Arab (Fi'il)</th>
+          <th>Arti (Bahasa Indonesia)</th>
+        </tr>
+      </thead>
+		<!-- Fi'il -->
+		<tr><td>اِسْتَيْقَظَ - يَسْتَيْقِظُ</td><td>bangun tidur</td></tr>
+        <tr><td>نَامَ - يَنَامُ</td><td>tidur</td></tr>
+        <tr><td>أَكَلَ - يَأْكُلُ</td><td>makan</td></tr>
+        <tr><td>شَرِبَ - يَشْرَبُ</td><td>minum</td></tr>
+        <tr><td>قَرَأَ - يَقْرَأُ</td><td>membaca</td></tr>
+        <tr><td>كَتَبَ - يَكْتُبُ</td><td>menulis</td></tr>
+        <tr><td>طَبَخَ - يَطْبُخُ</td><td>memasak</td></tr>
+        <tr><td>غَسَلَ - يَغْسِلُ</td><td>mencuci</td></tr>
+        <tr><td>كَنَسَ - يَكْنُسُ</td><td>menyapu</td></tr>
+        <tr><td>نَظَّفَ - يُنَظِّفُ</td><td>membersihkan</td></tr>
+        <tr><td>جَلَسَ - يَجْلِسُ</td><td>duduk</td></tr>
+        <tr><td>قَامَ - يَقُومُ</td><td>berdiri / bangun</td></tr>
+        <tr><td>لَعِبَ - يَلْعَبُ</td><td>bermain</td></tr>
+        <tr><td>سَاعَدَ - يُسَاعِدُ</td><td>membantu</td></tr>
+        <tr><td>فَتَحَ - يَفْتَحُ</td><td>membuka</td></tr>
+        <tr><td>أَغْلَقَ - يُغْلِقُ</td><td>menutup</td></tr>
+        <tr><td>دَخَلَ - يَدْخُلُ</td><td>masuk</td></tr>
+        <tr><td>خَرَجَ - يَخْرُجُ</td><td>keluar</td></tr>
+        <tr><td>لَبِسَ - يَلْبَسُ</td><td>memakai pakaian</td></tr>
+        <tr><td>خَلَعَ - يَخْلَعُ</td><td>melepas pakaian</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Konsep dan contoh jumlah fi'liyah -->
+  <section aria-labelledby="concept-title">
+       <h2 id="concept-title">Konsep Jumlah Fi‘liyah dan Contohnya</h2>
+    <div class="highlight-box" tabindex="0" aria-label="Penjelasan konsep jumlah fi‘liyah">
+      <p><strong>Jumlah fi‘liyah (الجملة الفعلية)</strong> adalah kalimat dalam bahasa Arab yang diawali dengan kata kerja (fi‘il).</p>
+      <p>Struktur dasarnya adalah:</p>
+      <p><em>Fi‘il (فعل) + Fā‘il (فاعل) + (Maf‘ūl Bihi مفعول به jika ada)</em></p>
+      <p>Fi‘il (فعل): kata kerja, bisa dalam bentuk māḍī (lampau) atau muḍāri‘ (sekarang/akan datang).</p>
+      <p>Fā‘il (فاعل): pelaku, bisa berbentuk mufrad (tunggal), mutsannā (dua), atau jamā‘ (banyak).</p>
+      <p>Maf‘ūl bih (مفعول به): objek, jika fi‘ilnya transitif.</p>
+    </div>
+
+    <h3>Contoh Jumlah Fi‘liyah Sesuai Bentuk Fā‘il</h3>
+
+    <div class="example" tabindex="0" aria-label="Contoh fā‘il mufrad">
+      <p class="example-arab">يَسْتَيْقِظُ الوَلَدُ مُبَكِّرًا.</p>
+      <p class="example-tr">(Anak laki-laki bangun lebih awal).</p>
+    </div>
+    <div class="example" tabindex="0" aria-label="Contoh fā‘il mutsannā">
+      <p class="example-arab">يَغْسِلُ الوَلَدَانِ الصُّحُونَ.</p>
+      <p class="example-tr">(Dua anak laki-laki mencuci piring).</p>
+    </div>
+    <div class="example" tabindex="0" aria-label="Contoh fā‘il jamā‘">
+      <p class="example-arab">يَكْنُسُ الأَوْلَادُ البَيْتَ.</p>
+      <p class="example-tr">(Anak-anak menyapu rumah).</p>
+    </div>
+
+    <h3>Variasi Jumlah Fi‘liyah dalam Aktivitas Sehari-hari</h3>
+    <div class="example" tabindex="0" aria-label="Contoh aktivitas sehari-hari 1">
+      <p class="example-arab">أَسْتَيْقِظُ فِي السَّاعَةِ السَّابِعَةِ.</p>
+      <p class="example-tr">(Saya bangun pada pukul tujuh).</p>
+    </div>
+    <div class="example" tabindex="0" aria-label="Contoh aktivitas sehari-hari 2">
+      <p class="example-arab">أَكْتُبُ الوَاجِبَ فِي المَسَاءِ.</p>
+      <p class="example-tr">(Saya menulis tugas pada malam hari).</p>
+    </div>
+    <div class="example" tabindex="0" aria-label="Contoh aktivitas sehari-hari 3">
+      <p class="example-arab">يَشْرَبُ الأَبُ القَهْوَةَ.</p>
+      <p class="example-tr">(Ayah minum kopi).</p>
+    </div>
+    <div class="example" tabindex="0" aria-label="Contoh aktivitas sehari-hari 4">
+      <p class="example-arab">تُرَتِّبُ الأُمُّ السَّرِيرَ.</p>
+      <p class="example-tr">(Ibu merapikan tempat tidur).</p>
+    </div>
+    <div class="example" tabindex="0" aria-label="Contoh aktivitas sehari-hari 5">
+      <p class="example-arab">يَلْعَبُ الأَوْلَادُ فِي الفِنَاءِ.</p>
+      <p class="example-tr">(Anak-anak bermain di halaman).</p>
+    </div>
+  </section>
+
+  <!-- Latihan Interaktif -->
+  <section class="exercise-section" aria-label="Latihan interaktif">
+    <h2>Latihan Penguatan</h2>
+
+    <!-- Quiz 1 -->
+    <div class="quiz" aria-labelledby="quiz1-title">
+      <h3 id="quiz1-title">Pilihan Ganda: Pilih kalimat jumlah fi‘liyah yang benar</h3>
+      <div class="quiz-question" id="q1">1. Kalimat mana yang diawali dengan kata kerja?</div>
+      <ul class="options" role="radiogroup" aria-labelledby="q1">
+        <li>
+          <input type="radio" id="q1a" name="q1" value="wrong" />
+          <label for="q1a">الولد في المدرسة</label>
+        </li>
+        <li>
+          <input type="radio" id="q1b" name="q1" value="correct" />
+          <label for="q1b">يذهب الولد إلى المدرسة</label>
+        </li>
+        <li>
+          <input type="radio" id="q1c" name="q1" value="wrong" />
+          <label for="q1c">الكتاب على الطاولة</label>
+        </li>
+      </ul>
+      <button class="check-btn" onclick="checkQuiz('q1')">Periksa</button>
+      <div class="feedback" id="feedback-q1" aria-live="polite"></div>
+    </div>
+
+    <!-- Quiz 2 -->
+    <div class="quiz" aria-labelledby="quiz2-title">
+      <h3 id="quiz2-title">Pilih fā‘il dalam kalimat: "يَكْتُبُ الطَّالِبُ الدَّرْسَ"</h3>
+      <div class="quiz-question" id="q2">2. Siapakah fā‘il (pelaku) dalam kalimat ini?</div>
+      <ul class="options" role="radiogroup" aria-labelledby="q2">
+        <li>
+          <input type="radio" id="q2a" name="q2" value="correct" />
+          <label for="q2a">الطَّالِبُ</label>
+        </li>
+        <li>
+          <input type="radio" id="q2b" name="q2" value="wrong" />
+          <label for="q2b">الدَّرْسَ</label>
+        </li>
+        <li>
+          <input type="radio" id="q2c" name="q2" value="wrong" />
+          <label for="q2c">يَكْتُبُ</label>
+        </li>
+      </ul>
+      <button class="check-btn" onclick="checkQuiz('q2')">Periksa</button>
+      <div class="feedback" id="feedback-q2" aria-live="polite"></div>
+    </div>
+
+    <!-- Drag & Drop 1 -->
+    <div class="dragdrop" aria-label="Latihan drag & drop">
+      <h3>Seret kata kerja yang tepat ke kalimat yang kosong</h3>
+      <p class="dragdrop-instruction">Seret kata kerja yang benar ke tempat kosong pada kalimat berikut.</p>
+      <div id="dragdrop1" class="dragdrop-container" aria-describedby="dragdrop1-desc">
+        <div class="drag-item" draggable="true" id="drag1" tabindex="0" aria-grabbed="false">يَشْرَبُ</div>
+        <div class="drag-item" draggable="true" id="drag2" tabindex="0" aria-grabbed="false">يَلْعَبُ</div>
+        <div class="drag-item" draggable="true" id="drag3" tabindex="0" aria-grabbed="false">يَكْتُبُ</div>
+      </div>
+      <div style="margin-top:1.5rem;">
+        <p>1. ___ الأَبُ القَهْوَةَ.</p>
+        <div class="drop-zone" data-correct="يَشْرَبُ" tabindex="0" aria-dropeffect="none" aria-label="Tempat drop kalimat pertama"></div>
+        <p>2. ___ الأَوْلَادُ فِي الحَدِيقَةِ.</p>
+        <div class="drop-zone" data-correct="يَلْعَبُ" tabindex="0" aria-dropeffect="none" aria-label="Tempat drop kalimat kedua"></div>
+        <p>3. ___ الطَّالِبُ الدَّرْسَ.</p>
+        <div class="drop-zone" data-correct="يَكْتُبُ" tabindex="0" aria-dropeffect="none" aria-label="Tempat drop kalimat ketiga"></div>
+      </div>
+      <button class="check-btn" onclick="checkDragDrop()">Periksa</button>
+      <div class="feedback" id="feedback-dragdrop" aria-live="polite"></div>
+    </div>
+  </section>
+
+  <!-- Evaluasi Akhir -->
+  <section class="final-quiz" aria-label="الاختبار النهائي">
+    <h2>الاختبار النهائي: اختبار فهم الجملة الفعلية وكلمات الأنشطة اليومية</h2>
+    <form id="finalQuizForm" aria-describedby="finalQuizDesc">
+      <p id="finalQuizDesc">أجب عن الأسئلة التالية لاختبار فهمك.</p>
+
+      <ol>
+        <li>
+          <p>1. ما هو تعريف الجملة الفعلية؟</p>
+          <label><input type="radio" name="qf1" value="correct" required /> جملة تبدأ بفعل</label><br />
+          <label><input type="radio" name="qf1" value="wrong" /> جملة تبدأ باسم</label><br />
+          <label><input type="radio" name="qf1" value="wrong" /> جملة تبدأ بحرف</label>
+        </li>
+        <li>
+          <p>2. في الجملة "يَكْتُبُ الطَّالِبُ الدَّرْسَ"، ما هو الفاعل؟</p>
+          <label><input type="radio" name="qf2" value="correct" required /> الطَّالِبُ</label><br />
+          <label><input type="radio" name="qf2" value="wrong" /> الدَّرْسَ</label><br />
+          <label><input type="radio" name="qf2" value="wrong" /> يَكْتُبُ</label>
+        </li>
+        <li>
+          <p>3. ما معنى كلمة "مَطْبَخٌ"؟</p>
+          <label><input type="radio" name="qf3" value="correct" required /> dapur</label><br />
+          <label><input type="radio" name="qf3" value="wrong" /> kamar</label><br />
+          <label><input type="radio" name="qf3" value="wrong" /> rumah</label>
+        </li>
+        <li>
+          <p>4. أي من الكلمات التالية فعل؟</p>
+          <label><input type="radio" name="qf4" value="correct" required /> يَشْرَبُ</label><br />
+          <label><input type="radio" name="qf4" value="wrong" /> بَيْتٌ</label><br />
+          <label><input type="radio" name="qf4" value="wrong" /> كِتَابٌ</label>
+        </li>
+        <li>
+          <p>5. في الجملة "يَلْعَبُ الأَوْلَادُ فِي الفِنَاءِ"، ما نوع الفاعل؟</p>
+          <label><input type="radio" name="qf5" value="correct" required /> جمع</label><br />
+          <label><input type="radio" name="qf5" value="wrong" /> مفرد</label><br />
+          <label><input type="radio" name="qf5" value="wrong" /> مثنى</label>
+        </li>
+        <!-- Tambahkan soal hingga 10-15 sesuai kebutuhan -->
+      </ol>
+      <button type="submit" class="btn-submit">أرسل الإجابات</button>
+      <div id="finalScore" class="score" aria-live="polite"></div>
+    </form>
+  </section>
+
+  <script>
+    // Quiz check function
+    function checkQuiz(qname) {
+      const options = document.getElementsByName(qname);
+      let selected = null;
+      for (const opt of options) {
+        if (opt.checked) {
+          selected = opt;
+          break;
+        }
+      }
+      const feedback = document.getElementById('feedback-' + qname);
+      if (!selected) {
+        feedback.textContent = 'Silakan pilih jawaban.';
+        feedback.className = 'feedback wrong';
+        return;
+      }
+      if (selected.value === 'correct') {
+        feedback.textContent = 'Jawaban benar! ✅';
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = 'Jawaban salah. Coba lagi.';
+        feedback.className = 'feedback wrong';
+      }
+    }
+
+    // Drag & Drop logic
+    const dragItems = document.querySelectorAll('.drag-item');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    let draggedItem = null;
+
+    dragItems.forEach(item => {
+      item.addEventListener('dragstart', e => {
+        draggedItem = item;
+        e.dataTransfer.setData('text/plain', item.textContent);
+        setTimeout(() => item.classList.add('hide'), 0);
+        item.setAttribute('aria-grabbed', 'true');
+      });
+      item.addEventListener('dragend', () => {
+        draggedItem.classList.remove('hide');
+        draggedItem.setAttribute('aria-grabbed', 'false');
+        draggedItem = null;
+      });
+      item.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          alert('Gunakan drag & drop dengan mouse atau sentuhan untuk menyelesaikan latihan.');
+        }
+      });
+    });
+
+    dropZones.forEach(zone => {
+      zone.addEventListener('dragover', e => {
+        e.preventDefault();
+        zone.classList.add('drag-over');
+      });
+      zone.addEventListener('dragleave', () => {
+        dropZones.forEach(z => z.classList.remove('drag-over'));
+      });
+      zone.addEventListener('drop', e => {
+        e.preventDefault();
+        dropZones.forEach(z => z.classList.remove('drag-over'));
+        if (draggedItem) {
+          zone.textContent = draggedItem.textContent;
+          zone.classList.add('filled');
+          zone.setAttribute('data-filled', 'true');
+        }
+      });
+    });
+
+    function checkDragDrop() {
+      let correctCount = 0;
+      dropZones.forEach(zone => {
+        const correct = zone.getAttribute('data-correct');
+        const filled = zone.textContent.trim();
+        if (filled === correct) {
+          correctCount++;
+          zone.style.borderColor = '#2d6a4f';
+          zone.style.backgroundColor = '#2d6a4f';
+          zone.style.color = '#caf0f8';
+        } else {
+          zone.style.borderColor = '#b00020';
+          zone.style.backgroundColor = '#f8d7da';
+          zone.style.color = '#b00020';
+        }
+      });
+      const feedback = document.getElementById('feedback-dragdrop');
+      if (correctCount === dropZones.length) {
+        feedback.textContent = 'Bagus! Semua jawaban benar. ✅';
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = `Anda menjawab dengan benar ${correctCount} dari ${dropZones.length}. Coba lagi.`;
+        feedback.className = 'feedback wrong';
+      }
+    }
+
+    // Final quiz submission
+    document.getElementById('finalQuizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const totalQuestions = 5; // sesuaikan dengan jumlah soal
+      let score = 0;
+      for (let i = 1; i <= totalQuestions; i++) {
+        const qName = 'qf' + i;
+        const options = form.elements[qName];
+        for (const opt of options) {
+          if (opt.checked && opt.value === 'correct') {
+            score++;
+          }
+        }
+      }
+      const scoreDiv = document.getElementById('finalScore');
+      scoreDiv.textContent = `Skor Anda: ${score} dari ${totalQuestions} (${Math.round((score/totalQuestions)*100)}%)`;
+      if(score === totalQuestions) {
+        scoreDiv.style.color = '#2d6a4f';
+      } else if(score >= totalQuestions/2) {
+        scoreDiv.style.color = '#f4a261';
+      } else {
+        scoreDiv.style.color = '#b00020';
+      }
+      scoreDiv.scrollIntoView({behavior: 'smooth'});
+    });
+  </script>
+</body>
+</html>
