@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+ <html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الدرس الخامس: المفعول معه والمفعول فيه (الظرف)</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+    body {
+      background: #f9f9f9;
+      color: #1a1a1a;
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem 1.5rem 3rem;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      color: #00796b;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      border-bottom: 3px solid #00796b;
+      padding-bottom: 0.3rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #004d40;
+    }
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      text-align: justify;
+    }
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    /* Pendahuluan */
+    .intro {
+      background: #b2dfdb;
+      border-radius: 15px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 6px 15px rgb(0 121 107 / 0.3);
+      margin-bottom: 2rem;
+    }
+    .intro svg {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+      fill: #004d40;
+    }
+    .intro-text {
+      font-size: 1.2rem;
+      color: #004d40;
+    }
+    /* Tabel mufrodat */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead {
+      background: #00796b;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #cfd8dc;
+      font-size: 1rem;
+    }
+    tbody tr:hover {
+      background: #e0f2f1;
+    }
+    /* Highlight box */
+    .highlight-box {
+      background: #004d40;
+      color: #e0f2f1;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 8px 20px rgb(0 77 64 / 0.7);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .highlight-box p {
+      margin-bottom: 0.8rem;
+    }
+    .example {
+      background: #b2dfdb;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 0.8rem 0 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #004d40;
+      box-shadow: inset 0 0 8px rgb(0 77 64 / 0.3);
+      line-height: 1.4;
+    }
+    .example-arab {
+      font-size: 1.4rem;
+      font-weight: 700;
+      direction: rtl;
+      margin-bottom: 0.3rem;
+      color: #00332f;
+    }
+    .example-tr {
+      font-style: italic;
+      color: #004d40;
+    }
+    /* Latihan interaktif */
+    .exercise-section {
+      margin-top: 3rem;
+    }
+    .exercise-section h2 {
+      margin-bottom: 1rem;
+    }
+    .quiz {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .quiz h3 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    .quiz-question {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .options li {
+      margin-bottom: 0.6rem;
+    }
+    .options label {
+      cursor: pointer;
+      user-select: none;
+      font-size: 1rem;
+      color: #1a1a1a;
+      background: #e0f2f1;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+    .options input[type="radio"] {
+      display: none;
+    }
+    .options input[type="radio"]:checked + label {
+      background-color: #004d40;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    button.check-btn {
+      margin-top: 1rem;
+      background: #004d40;
+      color: #e0f2f1;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.check-btn:hover,
+    button.check-btn:focus {
+      background: #00332f;
+      outline: none;
+    }
+    .feedback {
+      margin-top: 0.8rem;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .correct {
+      color: #2e7d32;
+    }
+    .wrong {
+      color: #c62828;
+    }
+    .learning-objectives {
+        margin-top: 1.5rem;
+        background: #e0f2f1;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        border-right: 5px solid #004d40;
+    }
+    .learning-objectives ul {
+        list-style-type: '📍';
+        padding-right: 1.5rem;
+    }
+    .learning-objectives li {
+        padding-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+    /* Responsive */
+    @media (max-width: 600px) {
+      .intro {
+        flex-direction: column;
+        text-align: center;
+      }
+      .intro svg {
+        margin: 0 auto;
+      }
+    }
+  </style>
+ </head>
+ <body>
+  <h1>الدرس الخامس: المفعول معه والمفعول فيه (الظرف)</h1>
+
+  <!-- Pendahuluan -->
+  <section class="intro" aria-label="Pendahuluan pelajaran">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <path d="M19,3H5C3.9,3,3,3.9,3,5v14c0,1.1,0.9,2,2,2h14c1.1,0,2-0.9,2-2V5C21,3.9,20.1,3,19,3z M12,6c1.1,0,2,0.9,2,2s-0.9,2-2,2 s-2-0.9-2-2S10.9,6,12,6z M18,18H6v-1.5c0-2,4-3.1,6-3.1s6,1.1,6,3.1V18z"/>
+        <path d="M0,0h24v24H0V0z" fill="none"/>
+    </svg>
+    <p class="intro-text">
+        Pada pelajaran ini, kita akan melanjutkan pembahasan kaidah pelengkap jumlah fi‘liyah, yaitu <strong>Maf‘ūl Ma‘ah</strong> (objek penyerta) dan <strong>Maf‘ūl Fīh</strong> (keterangan waktu dan tempat). Pemahaman kedua maf'ul ini akan membantu kita menyusun kalimat yang lebih deskriptif dan detail, khususnya dalam konteks tema kunjungan ke dokter.
+    </p>
+  </section>
+
+  <!-- Mufrodat kosa-kata -->
+  <section aria-labelledby="mufrodat-title">
+    <h2 id="mufrodat-title">Kosakata Terkait Kunjungan ke Dokter 🏥</h2>
+    <h3>Isim (Kata Benda)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>طَبِيب</td><td>dokter</td><td>مَرِيض</td><td>pasien</td></tr>
+        <tr><td>دَوَاء</td><td>obat</td><td>حُقْنَة</td><td>suntikan</td></tr>
+        <tr><td>حُمَّى</td><td>demam</td><td>صُدَاع</td><td>sakit kepala</td></tr>
+        <tr><td>سُعَال</td><td>batuk</td><td>مُسْتَشْفَى</td><td>rumah sakit</td></tr>
+        <tr><td>عِيَادَة</td><td>klinik</td><td>كُرْسِيّ</td><td>kursi</td></tr>
+        <tr><td>فَحْص</td><td>pemeriksaan</td><td>تَحْلِيل</td><td>analisis (tes lab)</td></tr>
+        <tr><td>وَصْفَة</td><td>resep</td><td>قَاعَةُ الِانْتِظَار</td><td>ruang tunggu</td></tr>
+        <tr><td>جِرَاحَة</td><td>operasi</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+    
+    <h3 style="margin-top: 2rem;">Fi‘il (Kata Kerja)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>ذَهَبَ – يَذْهَبُ</td><td>pergi</td><td>جَلَسَ – يَجْلِسُ</td><td>duduk</td></tr>
+        <tr><td>دَخَلَ – يَدْخُلُ</td><td>masuk</td><td>خَرَجَ – يَخْرُجُ</td><td>keluar</td></tr>
+        <tr><td>وَصَلَ – يَصِلُ</td><td>tiba</td><td>اِنْتَظَرَ – يَنْتَظِرُ</td><td>menunggu</td></tr>
+        <tr><td>فَحَصَ – يَفْحَصُ</td><td>memeriksa</td><td>وَصَفَ – يَصِفُ</td><td>meresepkan</td></tr>
+        <tr><td>شَرِبَ – يَشْرَبُ</td><td>minum</td><td>أَخَذَ – يَأْخُذُ</td><td>mengambil</td></tr>
+        <tr><td>كَتَبَ – يَكْتُبُ</td><td>menulis</td><td>قَاسَ – يَقِيسُ</td><td>mengukur</td></tr>
+        <tr><td>نَصَحَ – يَنْصَحُ</td><td>menasihati</td><td>عَالَجَ – يُعَالِجُ</td><td>mengobati</td></tr>
+        <tr><td>سَأَلَ – يَسْأَلُ</td><td>bertanya</td><td></td><td></td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Konsep Maf‘ūl Ma'ah dan Maf‘ūl Fīh -->
+  <section aria-labelledby="concept-title">
+    <h2 id="concept-title">Kaidah Pelengkap Jumlah Fi‘liyah: Maf‘ūl Ma‘ah dan Maf‘ūl Fīh</h2>
+    <div class="highlight-box" tabindex="0" aria-label="Penjelasan Maf‘ūl Ma'ah dan Maf‘ūl Fīh">
+      <p><strong>1. Maf‘ūl Ma‘ah (المفعول معه)</strong></p>
+      <p><strong>Definisi:</strong> Isim manshub yang disebutkan untuk menjelaskan sesuatu yang menyertai pekerjaan. Maf‘ul ma‘ah biasanya jatuh setelah wawu (و) yang bermakna "bersama" (مع).</p>
+      <p><strong>Syarat-syaratnya:</strong></p>
+      <ul>
+        <li>Harus berupa isim.</li>
+        <li>Ber-i‘rab nashob (manshub).</li>
+        <li>Terletak setelah huruf و yang bermakna "bersama".</li>
+        <li>Muncul setelah jumlah (kalimat) yang sempurna.</li>
+      </ul>
+      <p><strong>Pola:</strong> الجملة + و (بمعنى مع) + المفعول معه</p>
+      <p><strong>Contoh (Tema Kunjungan ke Dokter):</strong></p>
+      <div class="example" tabindex="0" aria-label="Contoh Maf‘ūl Ma'ah 1">
+        <p class="example-arab">ذَهَبْتُ إِلَى الطَّبِيبِ وَصَدِيقِي.</p>
+        <p class="example-tr">(Aku pergi ke dokter bersama temanku).</p>
+      </div>
+      <div class="example" tabindex="0" aria-label="Contoh Maf‘ūl Ma'ah 2">
+        <p class="example-arab">زُرْتُ الطَّبِيبَ وَنُزُولَ الْمَطَرِ.</p>
+        <p class="example-tr">(Aku mengunjungi dokter bersamaan dengan turunnya hujan).</p>
+      </div>
+       <div class="example" tabindex="0" aria-label="Contoh Maf‘ūl Ma'ah 3">
+        <p class="example-arab">جَلَسْتُ فِي قَاعَةِ الْاِنْتِظَارِ وَحُضُورَ الْمَرِيضِ الْآخَرِ.</p>
+        <p class="example-tr">(Aku duduk di ruang tunggu bersamaan dengan hadirnya pasien lain).</p>
+      </div>
+
+      <hr style="margin: 1.5rem 0; border-color: #00796b;" />
+
+     <p><strong>2. Maf‘ul Fīh (المفعول فيه / الظرف)</strong></p>
+     <p><strong>Definisi:</strong> Isim manshub yang menjelaskan tempat (makān) atau waktu (zamān) terjadinya suatu peristiwa.</p>
+     
+     <h3>أ. ظرف الزمان (Keterangan Waktu)</h3>
+     <p>Menunjukkan waktu, contoh: مَسَاءً (sore hari), صَبَاحًا (pagi hari), يَوْمًا (sehari), أُسْبُوْعًا (seminggu).</p>
+     
+     <h3>ب. ظرف المكان (Keterangan Tempat)</h3>
+     <p>Menunjukkan tempat, contoh: أَمَامَ (di depan), خَلْفَ (di belakang), عِنْدَ (di sisi), دَاخِلَ (di dalam).</p>
+     
+     <p><strong>Contoh (Tema Kunjungan ke Dokter):</strong></p>
+     <div class="example" tabindex="0" aria-label="Contoh Zharf 1">
+        <p class="example-arab">جَلَسْتُ عِنْدَ الطَّبِيبِ صَبَاحًا.</p>
+        <p class="example-tr">(Aku duduk di sisi dokter pada pagi hari).</p>
+     </div>
+      <div class="example" tabindex="0" aria-label="Contoh Zharf 2">
+        <p class="example-arab">اِنْتَظَرْتُ الْمَرِيضَ أَمَامَ الْعِيَادَةِ.</p>
+        <p class="example-tr">(Aku menunggu pasien di depan klinik).</p>
+     </div>
+      
+      <p><strong>Catatan Penting:</strong></p>
+      <ul>
+        <li>Jika wawu dipahami sebagai 'athaf, makna hanya sekedar gabungan subjek.</li>
+        <li>Jika wawu bermakna ma‘iyah, maka penekanan maknanya: bersamaan dalam tindakan.</li>
+      </ul>
+    </div>
+  </section>
+
+    <!-- Latihan Interaktif -->
+    <section class="exercise-section" aria-label="Latihan interaktif">
+      <h2>Latihan Penguatan</h2>
+      <div class="quiz" aria-labelledby="quiz1-title">
+        <h3 id="quiz1-title">Identifikasi Maf‘ūl Ma‘ah</h3>
+        <div class="quiz-question" id="q1">1. Kalimat mana yang mengandung Maf‘ūl Ma‘ah?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q1">
+          <li>
+            <input type="radio" id="q1a" name="q1" value="correct" />
+            <label for="q1a">زُرْتُ الطَّبِيبَ وَنُزُولَ الْمَطَرِ.</label>
+          </li>
+          <li>
+            <input type="radio" id="q1b" name="q1" value="wrong" />
+            <label for="q1b">اِنْتَظَرْتُ أَمَامَ الْعِيَادَةِ.</label>
+          </li>
+          <li>
+            <input type="radio" id="q1c" name="q1" value="wrong" />
+            <label for="q1c">جَاءَ الطَّبِيبُ وَالْمُمَرِّضُ.</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q1')">Periksa</button>
+        <div class="feedback" id="feedback-q1" aria-live="polite"></div>
+      </div>
+      <div class="quiz" aria-labelledby="quiz2-title">
+        <h3 id="quiz2-title">Identifikasi Maf‘ūl Fīh (Zharf Zaman)</h3>
+        <div class="quiz-question" id="q2">2. Kalimat mana yang mengandung keterangan waktu?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q2">
+          <li>
+            <input type="radio" id="q2a" name="q2" value="wrong" />
+            <label for="q2a">الصَّيْدَلِيَّةُ خَلْفَ الْمُسْتَشْفَى.</label>
+          </li>
+          <li>
+            <input type="radio" id="q2b" name="q2" value="correct" />
+            <label for="q2b">دَخَلْتُ الْمُسْتَشْفَى مَسَاءً.</label>
+          </li>
+          <li>
+            <input type="radio" id="q2c" name="q2" value="wrong" />
+            <label for="q2c">دَخَلْتُ الْمُسْتَشْفَى وَالْمَرِيضَ.</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q2')">Periksa</button>
+        <div class="feedback" id="feedback-q2" aria-live="polite"></div>
+      </div>
+      <div class="quiz" aria-labelledby="quiz3-title">
+        <h3 id="quiz3-title">Identifikasi Maf‘ūl Fīh (Zharf Makan)</h3>
+        <div class="quiz-question" id="q3">3. Kalimat mana yang mengandung keterangan tempat?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q3">
+          <li>
+            <input type="radio" id="q3a" name="q3" value="wrong" />
+            <label for="q3a">شَرِبْتُ الدَّوَاءَ بَعْدَ الْأَكْلِ.</label>
+          </li>
+          <li>
+            <input type="radio" id="q3b" name="q3" value="wrong" />
+            <label for="q3b">اِسْتَيْقَظْتُ وَأَذَانَ الْفَجْرِ.</label>
+          </li>
+          <li>
+            <input type="radio" id="q3c" name="q3" value="correct" />
+            <label for="q3c">اِنْتَظَرْتُ الْمَرِيضَ أَمَامَ الْعِيَادَةِ.</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q3')">Periksa</button>
+        <div class="feedback" id="feedback-q3" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <!-- Evaluasi Akhir -->
+     <section class="final-quiz" aria-label="Evaluasi akhir">
+       <h2>التقييم النهائي: اختبار فهم المفعول معه والمفعول فيه</h2>
+       <form id="finalQuizForm" aria-describedby="finalQuizDesc">
+         <p id="finalQuizDesc">أجب عن الأسئلة التالية لاختبار مدى فهمك.</p>
+         <ol style="list-style-type: decimal; padding-right: 20px;">
+           <li style="margin-bottom: 1rem;">
+             <p>ما هو المفعول معه؟</p>
+             <label><input type="radio" name="qf1" value="correct" required /> اسم منصوب يقع بعد واو المعية لبيان المصاحبة</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> اسم مرفوع يدل على الفاعل</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> اسم منصوب لبيان سبب الفعل</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>ما هو المفعول فيه؟</p>
+             <label><input type="radio" name="qf2" value="correct" required /> اسم منصوب يدل على زمان أو مكان وقوع الفعل</label><br />
+             <label><input type="radio" name="qf2" value="wrong" /> اسم منصوب من مصدر الفعل نفسه</label><br />
+             <label><input type="radio" name="qf2" value="wrong" /> اسم منصوب يقع بعد واو المعية</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "زُرْتُ الطَّبِيبَ وَنُزُولَ الْمَطَرِ"، كلمة "نُزُولَ" هي:</p>
+             <label><input type="radio" name="qf3" value="correct" required /> مفعول معه</label><br />
+             <label><input type="radio" name="qf3" value="wrong" /> فاعل</label><br />
+             <label><input type="radio" name="qf3" value="wrong" /> مفعول فيه</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "دَخَلْتُ الْمُسْتَشْفَى مَسَاءً"، كلمة "مَسَاءً" هي:</p>
+             <label><input type="radio" name="qf4" value="correct" required /> ظرف زمان</label><br />
+             <label><input type="radio" name="qf4" value="wrong" /> ظرف مكان</label><br />
+             <label><input type="radio" name="qf4" value="wrong" /> مفعول معه</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "اِنْتَظَرْتُ الْمَرِيضَ أَمَامَ الْعِيَادَةِ"، كلمة "أَمَامَ" هي:</p>
+             <label><input type="radio" name="qf5" value="correct" required /> ظرف مكان</label><br />
+             <label><input type="radio" name="qf5" value="wrong" /> ظرف زمان</label><br />
+             <label><input type="radio" name="qf5" value="wrong" /> مفعول مطلق</label>
+           </li>
+         </ol>
+         <button type="submit" class="check-btn">إرسال الإجابات</button>
+         <div id="finalScore" class="score" aria-live="polite" style="margin-top:1rem; font-weight:700; font-size:1.2rem;"></div>
+       </form>
+     </section>
+     
+    <div class="learning-objectives">
+        <h3 style="color: #004d40;">Dengan materi ini, Anda dapat:</h3>
+        <ul>
+            <li>Mengenal konsep jumlah fi‘liyah dengan pelengkap maf‘ul ma‘ah & maf‘ul fīh.</li>
+            <li>Memahami perbedaan makna wawu 'athaf dan wawu ma‘iyah.</li>
+            <li>Menerapkan contoh kalimat sesuai pengalaman kunjungan ke dokter.</li>
+            <li>Memperkaya kosakata tematis yang relevan dengan kegiatan sehari-hari.</li>
+        </ul>
+    </div>
+
+  <script>
+    // Quiz check function
+    function checkQuiz(qname) {
+      const options = document.getElementsByName(qname);
+      let selected = null;
+      for (const opt of options) {
+        if (opt.checked) {
+          selected = opt;
+          break;
+        }
+      }
+      const feedback = document.getElementById('feedback-' + qname);
+      if (!selected) {
+        feedback.textContent = 'Silakan pilih jawaban.';
+        feedback.className = 'feedback wrong';
+        return;
+      }
+      if (selected.value === 'correct') {
+        feedback.textContent = 'Jawaban benar! ✅';
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = 'Jawaban salah. Coba lagi.';
+        feedback.className = 'feedback wrong';
+      }
+    }
+
+    // Final quiz submission
+    document.getElementById('finalQuizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const totalQuestions = 5;
+      let score = 0;
+      for (let i = 1; i <= totalQuestions; i++) {
+        const qName = 'qf' + i;
+        const options = form.elements[qName];
+        if (options) {
+             for (const opt of options) {
+                if (opt.checked && opt.value === 'correct') {
+                    score++;
+                }
+            }
+        }
+      }
+      const scoreDiv = document.getElementById('finalScore');
+      scoreDiv.textContent = `Skor Anda: ${score} dari ${totalQuestions} (${Math.round((score/totalQuestions)*100)}%)`;
+      if(score === totalQuestions) {
+        scoreDiv.style.color = '#2e7d32';
+      } else if(score >= totalQuestions/2) {
+        scoreDiv.style.color = '#f9a825';
+      } else {
+        scoreDiv.style.color = '#c62828';
+      }
+      scoreDiv.scrollIntoView({behavior: 'smooth'});
+    });
+  </script>
+ </body>
+ </html>
+
