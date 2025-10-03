@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Game Petualangan Tamyiz</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Press+Start+2P&display=swap');
+        
+        :root {
+            --primary: #00796b;
+            --primary-dark: #004d40;
+            --accent: #b2dfdb;
+            --light: #e0f2f1;
+            --text: #1a1a1a;
+            --sand: #f4a460;
+            --sand-dark: #d28c4e;
+            --sky: #87ceeb;
+            --white: #ffffff;
+            --danger: #c62828;
+            --success: #2e7d32;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow: hidden;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary-dark);
+        }
+
+        .game-container {
+            position: relative;
+            width: 100%;
+            max-width: 800px;
+            height: 500px;
+            background: var(--sky);
+            border: 8px solid var(--sand-dark);
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* UI Elements */
+        #ui-layer {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+            font-family: 'Press Start 2P', cursive;
+            color: var(--primary-dark);
+            text-shadow: 2px 2px var(--white);
+        }
+        
+        #score-board {
+            display: flex;
+            justify-content: space-between;
+            font-size: 16px;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: var(--white);
+            z-index: 10;
+        }
+        
+        .overlay h1 {
+            color: var(--accent);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 3px 3px var(--primary-dark);
+        }
+
+        .overlay p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 80%;
+        }
+
+        .start-btn {
+            font-family: 'Press Start 2P', cursive;
+            font-size: 1.5rem;
+            padding: 15px 30px;
+            background: var(--sand);
+            color: var(--primary-dark);
+            border: 4px solid var(--sand-dark);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        .start-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Question Modal */
+        #question-modal {
+            background: var(--light);
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+            border: 5px solid var(--primary-dark);
+            direction: rtl; /* Right-to-left for Arabic */
+        }
+        
+        #question-modal h2 {
+            font-size: 1rem;
+            margin-bottom: 15px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+        }
+
+        #question-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            text-align: right;
+        }
+
+        #options-container {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        
+        .option-btn {
+            width: 100%;
+            padding: 12px;
+            background: var(--white);
+            border: 2px solid var(--accent);
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            transition: background-color 0.2s, color 0.2s;
+            text-align: right;
+        }
+
+        .option-btn:hover {
+            background-color: var(--accent);
+        }
+        
+        #feedback-text {
+            margin-top: 15px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            min-height: 25px;
+            text-align: center;
+        }
+
+        /* Touch Controls */
+        #touch-controls {
+            position: fixed;
+            bottom: 20px;
+            width: 100%;
+            max-width: 800px;
+            display: flex;
+            justify-content: space-between;
+            padding: 0 30px;
+            z-index: 20;
+            opacity: 0.7;
+        }
+        .touch-btn {
+            width: 70px;
+            height: 70px;
+            background: var(--primary);
+            border: 3px solid var(--primary-dark);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            user-select: none;
+        }
+        .touch-btn#jump-btn {
+            font-size: 2.5rem;
+        }
+
+
+        @media (max-width: 820px) {
+             body {
+                padding: 0;
+             }
+             .game-container {
+                width: 100vw;
+                height: calc(100vh - 80px); /* Adjust height for controls */
+                border-radius: 0;
+                border: none;
+             }
+             #ui-layer {
+                padding: 10px;
+             }
+             #score-board {
+                font-size: 12px;
+             }
+             .overlay h1 { font-size: 1.5rem; }
+             .overlay p { font-size: 1rem; }
+             .start-btn { font-size: 1.2rem; padding: 10px 20px;}
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="game-container">
+        <div id="start-screen" class="overlay">
+            <h1>Petualangan Tamyiz</h1>
+            <p>Bantu unta mengumpulkan makanan dan jawab pertanyaan tentang Tamyiz untuk belajar sambil bermain!</p>
+            <button id="start-game-btn" class="start-btn">Mulai</button>
+        </div>
+        
+        <div id="question-modal-container" class="overlay" style="display: none;">
+            <div id="question-modal">
+                <h2>Pilih Jawaban yang Tepat!</h2>
+                <p id="question-text"></p>
+                <div id="options-container"></div>
+                <p id="feedback-text"></p>
+            </div>
+        </div>
+
+        <div id="end-screen" class="overlay" style="display: none;">
+            <h1 id="end-title"></h1>
+            <p id="end-message"></p>
+            <button id="restart-game-btn" class="start-btn">Main Lagi</button>
+        </div>
+
+        <div id="ui-layer">
+            <div id="score-board">
+                <span id="score">Skor: 0</span>
+                <span id="collectibles-count">Makanan: 0/6</span>
+            </div>
+        </div>
+
+        <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <div id="touch-controls">
+        <div id="left-btn" class="touch-btn">◄</div>
+        <div id="right-btn" class="touch-btn">►</div>
+        <div id="jump-btn" class="touch-btn">▲</div>
+    </div>
+
+
+    <script>
+        const canvas = document.getElementById('gameCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        const startScreen = document.getElementById('start-screen');
+        const endScreen = document.getElementById('end-screen');
+        const questionModalContainer = document.getElementById('question-modal-container');
+        const startGameBtn = document.getElementById('start-game-btn');
+        const restartGameBtn = document.getElementById('restart-game-btn');
+
+        const scoreEl = document.getElementById('score');
+        const collectiblesCountEl = document.getElementById('collectibles-count');
+
+        let animationFrameId;
+        let gameActive = false;
+        
+        // Game settings
+        const gravity = 0.5;
+        let score = 0;
+        let collectiblesFound = 0;
+
+        // Player (Camel)
+        class Player {
+            constructor() {
+                this.position = { x: 100, y: 100 };
+                this.velocity = { x: 0, y: 0 };
+                this.width = 60;
+                this.height = 70;
+                this.speed = 5;
+                this.jumpForce = 12;
+                this.onGround = false;
+                this.gameFrame = 0;
+                this.direction = 'right';
+            }
+
+            draw() {
+                ctx.save();
+                const centerX = this.position.x + this.width / 2;
+                
+                // Flip canvas if facing left
+                if (this.direction === 'left') {
+                    ctx.translate(centerX, 0);
+                    ctx.scale(-1, 1);
+                    ctx.translate(-centerX, 0);
+                }
+
+                // Simple SVG-like camel
+                ctx.fillStyle = '#C19A6B'; // Camel color
+                // Body
+                ctx.beginPath();
+                ctx.ellipse(this.position.x + this.width / 2, this.position.y + this.height * 0.6, this.width/2, this.height/4, 0, 0, Math.PI * 2);
+                ctx.fill();
+                // Hump with animation
+                const humpHeight = 15 + Math.sin(this.gameFrame * 0.1) * 2;
+                ctx.beginPath();
+                ctx.arc(this.position.x + this.width / 2, this.position.y + this.height * 0.35, this.width/4, Math.PI, 0);
+                ctx.fill();
+                // Head
+                ctx.beginPath();
+                ctx.arc(this.position.x + this.width - 5, this.position.y + 15, 15, 0, Math.PI * 2);
+                ctx.fill();
+                 // Neck
+                ctx.fillRect(this.position.x + this.width - 20, this.position.y + 20, 10, 30);
+                
+                // Legs animation only when moving
+                const legOffset = (this.velocity.x !== 0 && this.onGround) ? Math.sin(this.gameFrame * 0.3) * 5 : 0;
+                ctx.fillStyle = '#A47C54';
+                ctx.fillRect(this.position.x + 10 + legOffset, this.position.y + this.height * 0.7, 8, 20);
+                ctx.fillRect(this.position.x + this.width - 20 - legOffset, this.position.y + this.height * 0.7, 8, 20);
+                
+                // Eye
+                ctx.fillStyle = 'black';
+                ctx.beginPath();
+                ctx.arc(this.position.x + this.width, this.position.y + 12, 3, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.restore();
+            }
+
+            update() {
+                this.gameFrame++;
+                this.draw();
+                this.position.x += this.velocity.x;
+                this.position.y += this.velocity.y;
+
+                // Apply gravity if not on ground
+                if (this.position.y + this.height + this.velocity.y < canvas.height) {
+                    this.velocity.y += gravity;
+                    this.onGround = false;
+                } else {
+                    this.velocity.y = 0;
+                    this.onGround = true;
+                    this.position.y = canvas.height - this.height;
+                }
+            }
+        }
+
+        // Platform
+        class Platform {
+            constructor(x, y, width, height) {
+                this.position = { x, y };
+                this.width = width;
+                this.height = height;
+            }
+            draw() {
+                ctx.fillStyle = '#d28c4e'; // sand-dark
+                ctx.fillRect(this.position.x, this.position.y, this.width, this.height);
+                ctx.fillStyle = '#f4a460'; // sand
+                ctx.fillRect(this.position.x, this.position.y, this.width, 5);
+            }
+        }
+        
+        // Collectible
+        class Collectible {
+            constructor(x, y, question) {
+                this.position = {x, y};
+                this.width = 30;
+                this.height = 40;
+                this.question = question;
+                this.active = true;
+            }
+            draw() {
+                if(!this.active) return;
+                // Draw a date palm fruit
+                ctx.fillStyle = '#8B4513';
+                ctx.beginPath();
+                ctx.ellipse(this.position.x + this.width/2, this.position.y + this.height/2, this.width/2, this.height/2, 0, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.fillStyle = '#228B22';
+                ctx.fillRect(this.position.x + this.width/2 - 2, this.position.y - 5, 4, 10);
+            }
+        }
+        
+        // Goal
+        class Goal {
+            constructor(x, y) {
+                this.position = { x, y };
+                this.width = 100;
+                this.height = 80;
+            }
+            draw() {
+                // Draw a simple tent
+                ctx.fillStyle = '#D2B48C'; // tan canvas
+                ctx.beginPath();
+                ctx.moveTo(this.position.x - 10, this.position.y + this.height);
+                ctx.lineTo(this.position.x + this.width / 2, this.position.y);
+                ctx.lineTo(this.position.x + this.width + 10, this.position.y + this.height);
+                ctx.closePath();
+                ctx.fill();
+                // Doorway
+                ctx.fillStyle = 'rgba(0,0,0,0.6)';
+                ctx.beginPath();
+                ctx.moveTo(this.position.x + 30, this.position.y + this.height);
+                ctx.lineTo(this.position.x + 40, this.position.y + 40);
+                ctx.lineTo(this.position.x + 60, this.position.y + 40);
+                ctx.lineTo(this.position.x + 70, this.position.y + this.height);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        // Tamyiz Questions
+        const questions = [
+            {
+                text: "في جملة 'اِشْتَرَيْتُ قِنْطَارًا قَمْحًا'، أي كلمة هي التمييز؟",
+                options: ["اِشْتَرَيْتُ", "قِنْطَارًا", "قَمْحًا"],
+                correct: 2,
+                explanation: "Correct! 'قَمْحًا' (gandum) menjelaskan kata 'قِنْطَارًا' (kwintal) yang masih umum."
+            },
+            {
+                text: "في جملة 'فِي المَكْتَبِ عِشْرُوْنَ مُوَظَّفًا'، كلمة 'مُوَظَّفًا' هي تمييز لنوع مميز ماذا؟",
+                options: ["وزن (timbangan)", "عدد (bilangan)", "مساحة (luas)"],
+                correct: 1,
+                explanation: "Excellent! 'مُوَظَّفًا' menjelaskan jumlah 'عِشْرُوْنَ' (dua puluh)."
+            },
+            {
+                text: "أكمل الجملة بالتمييز الصحيح: 'شَرِبْتُ كُوْبًا...'",
+                options: ["مَاءٌ", "مَاءٍ", "مَاءً"],
+                correct: 2,
+                explanation: "Tepat! Tamyiz harus manshub (berharakat fathah tanwin)."
+            },
+            {
+                text: "جملة 'طَابَ المُوَظَّفُ نَفْسًا' تحتوي على تمييز لمميز ملحوظ أصله...",
+                options: ["مبتدأ", "فاعل", "مفعول به"],
+                correct: 1,
+                explanation: "Benar! Asal kalimatnya adalah 'طَابَتْ نَفْسُ المُوَظَّفِ', jadi 'نَفْسًا' asalnya adalah Fa'il (subjek)."
+            },
+            {
+                text: "ما هو حكم إعراب تمييز المميز الملحوظ؟",
+                options: ["دائما منصوب", "دائما مجرور", "يجوز النصب والجر"],
+                correct: 0,
+                explanation: "Betul! Tamyiz untuk Mumayyaz Malhuzh selalu dalam keadaan manshub."
+            },
+            {
+                text: "في جملة 'وَزَنْتُ كِيْلُوًا بُنًّا'، أي كلمة هي المميز؟",
+                options: ["بُنًّا", "كِيْلُوًا", "وَزَنْتُ"],
+                correct: 1,
+                explanation: "Hebat! 'كِيْلُوًا' (satu kilo) adalah kata yang dijelaskan (Mumayyaz)."
+            }
+        ];
+
+
+        let player;
+        let platforms = [];
+        let collectibles = [];
+        let goal;
+        let keys = { right: false, left: false, up: false };
+        let scrollOffset = 0;
+
+        function init() {
+            canvas.width = 800;
+            canvas.height = 500;
+            
+            player = new Player();
+            
+            const levelWidth = 4000;
+            platforms = [
+                new Platform(-1, 450, 400, 50),
+                new Platform(500, 350, 200, 50),
+                new Platform(800, 450, 400, 50),
+                new Platform(1300, 300, 250, 50),
+                new Platform(1700, 450, 500, 50),
+                new Platform(2300, 350, 200, 50),
+                new Platform(2600, 250, 200, 50),
+                new Platform(3000, 450, levelWidth - 3000 + 100, 50) // Last platform extends to the end
+            ];
+
+            collectibles = [
+                new Collectible(550, 310, questions[0]),
+                new Collectible(900, 410, questions[1]),
+                new Collectible(1400, 260, questions[2]),
+                new Collectible(1800, 410, questions[3]),
+                new Collectible(2400, 310, questions[4]),
+                new Collectible(2700, 210, questions[5])
+            ];
+            
+            goal = new Goal(levelWidth - 150, 450 - 80);
+
+            score = 0;
+            collectiblesFound = 0;
+            scrollOffset = 0;
+            gameActive = true;
+
+            updateUI();
+            
+            if (animationFrameId) cancelAnimationFrame(animationFrameId);
+            animate();
+        }
+        
+        function drawBackground() {
+            // Far background (dunes)
+            ctx.fillStyle = '#f2d1a1';
+            ctx.beginPath();
+            ctx.moveTo(0, canvas.height);
+            ctx.lineTo(0, 300);
+            ctx.quadraticCurveTo(150, 200, 300, 300);
+            ctx.quadraticCurveTo(500, 250, 700, 350);
+            ctx.quadraticCurveTo(900, 300, canvas.width, 320);
+            ctx.lineTo(canvas.width, canvas.height);
+            ctx.fill();
+            
+            // Near background (pyramid)
+            ctx.fillStyle = '#e4b979';
+            ctx.beginPath();
+            const pyramidX = 100 - scrollOffset * 0.1;
+            ctx.moveTo(pyramidX, 450);
+            ctx.lineTo(pyramidX + 100, 250);
+            ctx.lineTo(pyramidX + 200, 450);
+            ctx.closePath();
+            ctx.fill();
+
+        }
+
+        function animate() {
+            if (!gameActive) return;
+            animationFrameId = requestAnimationFrame(animate);
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            drawBackground();
+
+            ctx.save();
+            ctx.translate(-scrollOffset, 0);
+
+            platforms.forEach(p => p.draw());
+            collectibles.forEach(c => c.draw());
+            goal.draw();
+            player.update();
+
+            ctx.restore();
+
+            // Player movement and scrolling logic
+            if (keys.right) {
+                player.velocity.x = player.speed;
+            } else if (keys.left) {
+                 player.velocity.x = -player.speed;
+            } else {
+                player.velocity.x = 0;
+            }
+
+            // Camera scrolling
+            const screenPlayerX = player.position.x - scrollOffset;
+            const scrollThresholdRight = canvas.width / 2;
+            const scrollThresholdLeft = 100;
+
+            if (keys.right && screenPlayerX > scrollThresholdRight) {
+                scrollOffset += player.speed;
+            } else if (keys.left && screenPlayerX < scrollThresholdLeft && scrollOffset > 0) {
+                scrollOffset -= player.speed;
+            }
+            
+            // Prevent camera from going into negative values
+            if (scrollOffset < 0) {
+                scrollOffset = 0;
+            }
+            // Prevent player from moving before the start of the level
+            if(player.position.x < 0){
+                player.position.x = 0;
+            }
+
+
+            // Platform collision
+            platforms.forEach(platform => {
+                if (
+                    player.position.y + player.height <= platform.position.y &&
+                    player.position.y + player.height + player.velocity.y >= platform.position.y &&
+                    player.position.x + player.width >= platform.position.x &&
+                    player.position.x <= platform.position.x + platform.width
+                ) {
+                    player.velocity.y = 0;
+                    player.onGround = true;
+                }
+            });
+
+            // Collectible collision
+            collectibles.forEach(collectible => {
+                if (collectible.active &&
+                    player.position.x < collectible.position.x + collectible.width &&
+                    player.position.x + player.width > collectible.position.x &&
+                    player.position.y < collectible.position.y + collectible.height &&
+                    player.position.y + player.height > collectible.position.y
+                ) {
+                    collectible.active = false;
+                    gameActive = false; // Pause game
+                    showQuestion(collectible.question);
+                }
+            });
+
+            // Win condition (collision with goal)
+            if (
+                player.position.x + player.width > goal.position.x &&
+                player.position.x < goal.position.x + goal.width &&
+                player.position.y + player.height > goal.position.y
+            ) {
+                 endGame(true);
+            }
+        }
+
+        function showQuestion(q) {
+            questionModalContainer.style.display = 'flex';
+            document.getElementById('question-text').textContent = q.text;
+            const optionsContainer = document.getElementById('options-container');
+            const feedbackText = document.getElementById('feedback-text');
+            optionsContainer.innerHTML = '';
+            feedbackText.textContent = '';
+            feedbackText.style.color = 'var(--text)';
+
+            q.options.forEach((option, index) => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.classList.add('option-btn');
+                button.onclick = () => {
+                    // Disable all buttons after one is clicked
+                    Array.from(optionsContainer.children).forEach(btn => btn.disabled = true);
+                    
+                    if (index === q.correct) {
+                        feedbackText.textContent = "Jawaban Benar! " + q.explanation;
+                        feedbackText.style.color = 'var(--success)';
+                        score += 10;
+                        collectiblesFound++;
+                    } else {
+                        feedbackText.textContent = "Jawaban Salah. Yang benar adalah: " + q.options[q.correct];
+                        feedbackText.style.color = 'var(--danger)';
+                    }
+                    updateUI();
+                    
+                    setTimeout(() => {
+                        questionModalContainer.style.display = 'none';
+                        gameActive = true;
+                        animate();
+                    }, 1500);
+                };
+                optionsContainer.appendChild(button);
+            });
+        }
+        
+        function updateUI() {
+            scoreEl.textContent = `Skor: ${score}`;
+            collectiblesCountEl.textContent = `Makanan: ${collectiblesFound}/${questions.length}`;
+        }
+        
+        function endGame(isWin) {
+            gameActive = false;
+            cancelAnimationFrame(animationFrameId);
+            endScreen.style.display = 'flex';
+            const endTitle = document.getElementById('end-title');
+            const endMessage = document.getElementById('end-message');
+
+            if(isWin) {
+                endTitle.textContent = 'Selamat!';
+                endMessage.textContent = `Kamu berhasil menyelesaikan petualangan dengan skor ${score}. Pengetahuanmu tentang Tamyiz luar biasa!`;
+            } else {
+                // Future implementation for game over
+            }
+        }
+
+        // Event Listeners
+        function handleKeyDown(e) {
+            switch (e.key) {
+                case 'ArrowRight':
+                case 'd':
+                    keys.right = true;
+                    player.direction = 'right';
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                    keys.left = true;
+                    player.direction = 'left';
+                    break;
+                case 'ArrowUp':
+                case 'w':
+                case ' ':
+                    if (player.onGround) {
+                        player.velocity.y = -player.jumpForce;
+                        player.onGround = false;
+                    }
+                    break;
+            }
+        }
+        
+        function handleKeyUp(e) {
+            switch (e.key) {
+                case 'ArrowRight':
+                case 'd':
+                    keys.right = false;
+                    break;
+                case 'ArrowLeft':
+                case 'a':
+                    keys.left = false;
+                    break;
+            }
+        }
+        
+        // Touch controls setup
+        function setupControls() {
+            const touchControls = document.getElementById('touch-controls');
+            touchControls.style.display = 'flex';
+
+            const leftBtn = document.getElementById('left-btn');
+            const rightBtn = document.getElementById('right-btn');
+            const jumpBtn = document.getElementById('jump-btn');
+            
+            // Left Button
+            ['touchstart', 'mousedown'].forEach(evt => {
+                leftBtn.addEventListener(evt, (e) => { e.preventDefault(); keys.left = true; player.direction = 'left'; });
+            });
+            ['touchend', 'mouseup', 'mouseleave'].forEach(evt => {
+                leftBtn.addEventListener(evt, (e) => { e.preventDefault(); keys.left = false; });
+            });
+
+            // Right Button
+            ['touchstart', 'mousedown'].forEach(evt => {
+                rightBtn.addEventListener(evt, (e) => { e.preventDefault(); keys.right = true; player.direction = 'right'; });
+            });
+            ['touchend', 'mouseup', 'mouseleave'].forEach(evt => {
+                rightBtn.addEventListener(evt, (e) => { e.preventDefault(); keys.right = false; });
+            });
+
+            // Jump Button
+            ['touchstart', 'mousedown'].forEach(evt => {
+                jumpBtn.addEventListener(evt, (e) => { 
+                    e.preventDefault(); 
+                    if (player && player.onGround) {
+                        player.velocity.y = -player.jumpForce;
+                        player.onGround = false;
+                    }
+                });
+            });
+        }
+
+        startGameBtn.addEventListener('click', () => {
+            startScreen.style.display = 'none';
+            init();
+        });
+        
+        restartGameBtn.addEventListener('click', () => {
+            endScreen.style.display = 'none';
+            init();
+        });
+
+        window.addEventListener('keydown', handleKeyDown);
+        window.addEventListener('keyup', handleKeyUp);
+        
+        setupControls();
+    </script>
+</body>
+</html>
+

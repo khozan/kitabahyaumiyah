@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>Pelari Tamyiz: Kejar Target Kantormu!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            overflow: hidden;
+            background-color: #334155;
+            touch-action: none;
+        }
+        .font-game {
+            font-family: 'Press Start 2P', cursive;
+        }
+        #game-container {
+            width: 100%;
+            height: 100%;
+            max-width: 1000px;
+            max-height: 700px;
+            background-color: #475569;
+            position: relative;
+        }
+        .modal-backdrop {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+        .modal-content {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 1.5rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            border: 5px solid #475569;
+            transform: scale(0.9);
+            opacity: 0;
+            animation: fadeInScale 0.3s ease-out forwards;
+        }
+        @keyframes fadeInScale {
+            to { transform: scale(1); opacity: 1; }
+        }
+        .correct-flash { animation: flash-green 0.5s ease; }
+        .wrong-flash { animation: flash-red 0.5s ease; }
+        @keyframes flash-green { 50% { background-color: rgba(16, 185, 129, 0.3); } }
+        @keyframes flash-red { 50% { background-color: rgba(239, 68, 68, 0.3); } }
+    </style>
+</head>
+<body class="flex items-center justify-center h-screen">
+
+    <div id="game-container" class="shadow-2xl overflow-hidden">
+        <!-- Canvas Game -->
+        <canvas id="gameCanvas"></canvas>
+
+        <!-- UI Dalam Game -->
+        <div id="game-ui" class="absolute top-0 left-0 w-full p-4 z-10 hidden">
+            <div class="flex justify-between items-center text-white text-lg font-game" style="text-shadow: 2px 2px 4px #000;">
+                <p>SKOR: <span id="score">0</span></p>
+                <p>LEVEL: <span id="level-display">1</span></p>
+                <p>NYAWA: <span id="lives">💚💚💚</span></p>
+            </div>
+            <div id="task-display" class="w-full text-center mt-4 p-3 bg-black bg-opacity-60 rounded-xl hidden">
+                 <p class="text-slate-300 text-sm">Pilih jalur dengan Tamyiz yang benar:</p>
+                 <p id="task-sentence" class="text-white text-2xl font-bold" style="direction: rtl;"></p>
+            </div>
+        </div>
+
+        <!-- === MODALS === -->
+        <div id="start-screen" class="modal-backdrop">
+            <div class="modal-content text-center">
+                <h1 class="text-3xl md:text-4xl font-bold text-slate-800 mb-2 font-game">Pelari Tamyiz</h1>
+                <p class="text-slate-700 mb-6 text-lg">Kejar Target Kantormu!</p>
+                <p class="text-slate-600 mb-8 md:text-lg">Lari dan lompati rintangan! Saat ada pilihan jalur, masuklah ke jalur dengan <span class="font-bold text-indigo-600">Tamyiz</span> yang tepat untuk mendapat skor.</p>
+                <p class="text-slate-500 text-sm">Kontrol: Panah Kiri/Kanan untuk pindah jalur, Spasi untuk melompat. Di HP, geser (swipe) Kiri/Kanan dan ketuk (tap) untuk melompat.</p>
+                <button id="start-btn" class="mt-6 bg-green-500 hover:bg-green-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg font-game">Mulai</button>
+            </div>
+        </div>
+
+        <div id="end-screen" class="modal-backdrop hidden">
+             <div class="modal-content text-center">
+                <h1 id="end-title" class="text-3xl md:text-4xl font-bold text-slate-800 mb-4 font-game"></h1>
+                <p class="text-slate-600 mb-4 md:text-lg">Skor Akhir:</p>
+                <p id="final-score" class="text-6xl font-bold text-indigo-600 mb-6 font-game"></p>
+                <button id="restart-btn" class="bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 px-8 rounded-full text-lg shadow-lg font-game">Main Lagi</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function() {
+            const canvas = document.getElementById('gameCanvas');
+            const ctx = canvas.getContext('2d');
+            const gameContainer = document.getElementById('game-container');
+            const startScreen = document.getElementById('start-screen');
+            const gameUI = document.getElementById('game-ui');
+            const endScreen = document.getElementById('end-screen');
+            const startBtn = document.getElementById('start-btn');
+            const restartBtn = document.getElementById('restart-btn');
+            const scoreEl = document.getElementById('score');
+            const livesEl = document.getElementById('lives');
+            const levelDisplayEl = document.getElementById('level-display');
+            const finalScoreEl = document.getElementById('final-score');
+            const endTitle = document.getElementById('end-title');
+            const taskSentenceEl = document.getElementById('task-sentence');
+            const taskDisplay = document.getElementById('task-display');
+
+            canvas.width = gameContainer.clientWidth;
+            canvas.height = gameContainer.clientHeight;
+            
+            let score, lives, gameActive, gameSpeed, frameCount;
+            let player, obstacles = [], choiceGates = [];
+            const gravity = 0.6;
+            const lanes = [canvas.width * 0.25, canvas.width * 0.5, canvas.width * 0.75];
+            
+            const playerImage = new Image();
+            playerImage.src = 'image/pesawat.png'; 
+            const obstacleImage = new Image();
+            obstacleImage.src = 'image/batu.png';
+
+            // --- PENGATURAN LEVEL ---
+            const levels = [
+                {
+                    speed: 4, // Kecepatan lari level 1
+                    obstacleInterval: 240, // Jeda kemunculan batu (lebih lama)
+                    questionInterval: 1200, // Jeda kemunculan soal (lebih lama)
+                    sentences: [
+                        { sentence: "وَزَنْتُ كِيْلُوًا بُنًّا", words: ["وَزَنْتُ", "كِيْلُوًا"], tamyiz: "بُنًّا" },
+                        { sentence: "شَرِبْتُ كُوْبًا مَاءً", words: ["شَرِبْتُ", "كُوْبًا"], tamyiz: "مَاءً" },
+                        { sentence: "نَظَّفْتُ مِتْرًا أَرْضًا", words: ["نَظَّفْتُ", "مِتْرًا"], tamyiz: "أَرْضًا" },
+                        { sentence: "فِي المَكْتَبِ عِشْرُوْنَ مُوَظَّفًا", words: ["المَكْتَبِ", "عِشْرُوْنَ"], tamyiz: "مُوَظَّفًا" },
+                    ]
+                },
+                {
+                    speed: 5.5, // Kecepatan lari level 2
+                    obstacleInterval: 180, // Jeda kemunculan batu (lebih cepat)
+                    questionInterval: 900,  // Jeda kemunculan soal (lebih cepat)
+                    sentences: [
+                        { sentence: "المُدِيرُ أَكْثَرُ خِبْرَةً", words: ["المُدِيرُ", "أَكْثَرُ"], tamyiz: "خِبْرَةً" },
+                        { sentence: "طَابَ المُوَظَّفُ نَفْسًا", words: ["طَابَ", "المُوَظَّفُ"], tamyiz: "نَفْسًا" },
+                        { sentence: "اِشْتَرَيْتُ جِرَامًا ذَهَبًا", words: ["اِشْتَرَيْتُ", "جِرَامًا"], tamyiz: "ذَهَبًا" },
+                        { sentence: "أَعْدَدْتُ كُوْبَيْنِ قَهْوَةً", words: ["أَعْدَدْتُ", "كُوْبَيْنِ"], tamyiz: "قَهْوَةً" },
+                    ]
+                }
+            ];
+            let currentLevelIndex;
+            let currentSentence;
+            let usedSentenceIndices = [];
+
+            class Player {
+                constructor() {
+                    this.width = 70;
+                    this.height = 60;
+                    this.lane = 1;
+                    this.x = lanes[this.lane];
+                    this.y = canvas.height - this.height - 20;
+                    this.vy = 0;
+                    this.grounded = true;
+                    this.imageLoaded = false;
+                    playerImage.onload = () => { this.imageLoaded = true; };
+                }
+                draw() {
+                    if (this.imageLoaded && playerImage.complete) {
+                        ctx.drawImage(playerImage, this.x - this.width / 2, this.y, this.width, this.height);
+                    } else {
+                        ctx.fillStyle = '#60A5FA';
+                        ctx.fillRect(this.x - this.width / 2, this.y + 15, this.width, this.height - 25);
+                        ctx.fillStyle = '#A5B4FC';
+                        ctx.fillRect(this.x - this.width / 2 + 10, this.y, this.width - 20, 20);
+                        ctx.fillStyle = '#374151';
+                        ctx.beginPath();
+                        ctx.arc(this.x - this.width / 4, this.y + this.height - 10, 10, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.beginPath();
+                        ctx.arc(this.x + this.width / 4, this.y + this.height - 10, 10, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                }
+                update() {
+                    if (!this.grounded) {
+                        this.vy += gravity;
+                        this.y += this.vy;
+                    }
+                    if (this.y >= canvas.height - this.height - 20) {
+                        this.y = canvas.height - this.height - 20;
+                        this.vy = 0;
+                        this.grounded = true;
+                    }
+                    const targetX = lanes[this.lane];
+                    this.x += (targetX - this.x) * 0.2;
+                    this.draw();
+                }
+                jump() {
+                    if (this.grounded) {
+                        this.vy = -14;
+                        this.grounded = false;
+                    }
+                }
+                move(direction) {
+                    this.lane = Math.max(0, Math.min(2, this.lane + direction));
+                }
+            }
+
+            class Obstacle {
+                constructor() {
+                    this.width = 60;
+                    this.height = 50;
+                    this.lane = Math.floor(Math.random() * 3);
+                    this.x = lanes[this.lane] - this.width / 2;
+                    this.y = -this.height;
+                    this.imageLoaded = false;
+                    obstacleImage.onload = () => { this.imageLoaded = true; };
+                }
+                draw() {
+                     if (this.imageLoaded && obstacleImage.complete) {
+                        ctx.drawImage(obstacleImage, this.x, this.y, this.width, this.height);
+                    } else {
+                        ctx.fillStyle = '#A1A1AA';
+                        ctx.beginPath();
+                        ctx.moveTo(this.x, this.y + this.height * 0.5);
+                        ctx.lineTo(this.x + this.width * 0.2, this.y);
+                        ctx.lineTo(this.x + this.width * 0.8, this.y + this.height * 0.1);
+                        ctx.lineTo(this.x + this.width, this.y + this.height * 0.6);
+                        ctx.lineTo(this.x + this.width * 0.7, this.y + this.height);
+                        ctx.lineTo(this.x + this.width * 0.1, this.y + this.height * 0.9);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+                }
+                update() {
+                    this.y += gameSpeed;
+                    this.draw();
+                }
+            }
+            
+            class ChoiceGate {
+                constructor(options) {
+                    this.y = -100;
+                    this.height = 80;
+                    this.passed = false;
+                    this.options = options;
+                }
+                draw() {
+                    this.options.forEach(opt => {
+                        ctx.fillStyle = this.passed ? (opt.isCorrect ? 'rgba(16, 185, 129, 0.5)' : 'rgba(239, 68, 68, 0.5)') : 'rgba(245, 158, 11, 0.8)';
+                        const gateX = lanes[opt.lane] - 50;
+                        ctx.fillRect(gateX, this.y, 100, this.height);
+                        
+                        ctx.fillStyle = 'white';
+                        ctx.font = '24px Inter';
+                        ctx.textAlign = 'center';
+                        ctx.fillText(opt.text, lanes[opt.lane], this.y + this.height / 2 + 8);
+                    });
+                }
+                update() {
+                    this.y += gameSpeed;
+                    this.draw();
+                }
+            }
+            
+            function spawnObstacle() {
+                if (Math.random() < 0.8) {
+                    obstacles.push(new Obstacle());
+                }
+            }
+
+            function spawnChoiceGate() {
+                const level = levels[currentLevelIndex];
+                if (usedSentenceIndices.length >= level.sentences.length) {
+                    currentLevelIndex = (currentLevelIndex + 1) % levels.length;
+                    gameSpeed = levels[currentLevelIndex].speed;
+                    usedSentenceIndices = [];
+                    updateUI();
+                }
+                
+                let sentenceIndex;
+                do {
+                    sentenceIndex = Math.floor(Math.random() * level.sentences.length);
+                } while (usedSentenceIndices.includes(sentenceIndex));
+                
+                usedSentenceIndices.push(sentenceIndex);
+                currentSentence = level.sentences[sentenceIndex];
+                taskSentenceEl.textContent = currentSentence.sentence;
+                taskDisplay.classList.remove('hidden');
+
+                let choices = [currentSentence.tamyiz, ...currentSentence.words.slice(0, 2)];
+                choices = choices.sort(() => Math.random() - 0.5);
+                
+                const options = choices.map((choice, index) => ({
+                    text: choice,
+                    isCorrect: choice === currentSentence.tamyiz,
+                    lane: index
+                }));
+
+                choiceGates.push(new ChoiceGate(options));
+            }
+
+            function init() {
+                score = 0;
+                lives = 3;
+                gameActive = true;
+                frameCount = 0;
+                currentLevelIndex = 0;
+                gameSpeed = levels[currentLevelIndex].speed;
+                obstacles = [];
+                choiceGates = [];
+                usedSentenceIndices = [];
+                
+                player = new Player();
+                updateUI();
+                spawnChoiceGate(); 
+                animate();
+            }
+
+            function updateUI() {
+                scoreEl.textContent = score;
+                livesEl.innerHTML = '💚'.repeat(lives > 0 ? lives : 0);
+                levelDisplayEl.textContent = currentLevelIndex + 1;
+            }
+
+            function checkCollisions() {
+                obstacles.forEach((obs, index) => {
+                    if (player.lane === obs.lane &&
+                        player.y < obs.y + obs.height &&
+                        player.y + player.height > obs.y) {
+                        obstacles.splice(index, 1);
+                        loseLife();
+                    }
+                });
+
+                choiceGates.forEach((gate) => {
+                    if (!gate.passed && player.y + player.height > gate.y && player.y < gate.y + gate.height) {
+                        gate.passed = true;
+                        taskDisplay.classList.add('hidden');
+                        const chosenOption = gate.options.find(opt => opt.lane === player.lane);
+                        if (chosenOption.isCorrect) {
+                            score += 100;
+                            gameContainer.classList.add('correct-flash');
+                            setTimeout(() => gameContainer.classList.remove('correct-flash'), 500);
+                        } else {
+                            loseLife();
+                        }
+                        updateUI();
+                    }
+                });
+            }
+
+            function loseLife() {
+                if(!gameActive) return;
+                lives--;
+                gameContainer.classList.add('wrong-flash');
+                setTimeout(() => gameContainer.classList.remove('wrong-flash'), 500);
+                updateUI();
+                if (lives <= 0) {
+                    endGame(false);
+                }
+            }
+
+            function endGame() {
+                gameActive = false;
+                endTitle.textContent = "GAME OVER";
+                finalScoreEl.textContent = score;
+                endScreen.classList.remove('hidden');
+            }
+
+            function animate() {
+                if (!gameActive) return;
+                requestAnimationFrame(animate);
+                frameCount++;
+                
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                ctx.fillStyle = '#6B7280';
+                ctx.fillRect(0, canvas.height - 20, canvas.width, 20);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
+                ctx.setLineDash([10, 15]);
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(lanes[0] + (lanes[1]-lanes[0])/2, 0);
+                ctx.lineTo(lanes[0] + (lanes[1]-lanes[0])/2, canvas.height);
+                ctx.moveTo(lanes[1] + (lanes[2]-lanes[1])/2, 0);
+                ctx.lineTo(lanes[1] + (lanes[2]-lanes[1])/2, canvas.height);
+                ctx.stroke();
+                ctx.setLineDash([]);
+
+
+                player.update();
+                
+                // Menggunakan interval dari pengaturan level
+                const currentLevel = levels[currentLevelIndex];
+                if (frameCount > 0 && frameCount % currentLevel.obstacleInterval === 0) {
+                    spawnObstacle();
+                }
+                if (frameCount > 0 && frameCount % currentLevel.questionInterval === 0) {
+                    if (choiceGates.length === 0 || choiceGates[choiceGates.length - 1].y > canvas.height / 2) {
+                       spawnChoiceGate();
+                    }
+                }
+                
+                obstacles = obstacles.filter(obs => obs.y < canvas.height);
+                obstacles.forEach(obs => obs.update());
+                
+                choiceGates = choiceGates.filter(gate => gate.y < canvas.height);
+                choiceGates.forEach(gate => gate.update());
+
+                checkCollisions();
+            }
+
+            function setupControls() {
+                window.addEventListener('keydown', e => {
+                    if (!gameActive) return;
+                    if (e.code === 'ArrowLeft') player.move(-1);
+                    if (e.code === 'ArrowRight') player.move(1);
+                    if (e.code === 'Space') player.jump();
+                });
+
+                let touchStartX = 0;
+                canvas.addEventListener('touchstart', e => {
+                    if (!gameActive) return;
+                    touchStartX = e.touches[0].clientX;
+                }, { passive: true });
+                canvas.addEventListener('touchend', e => {
+                    if (!gameActive) return;
+                    const touchEndX = e.changedTouches[0].clientX;
+                    const swipeDist = touchEndX - touchStartX;
+                    if (Math.abs(swipeDist) > 50) {
+                        player.move(swipeDist > 0 ? 1 : -1);
+                    } else {
+                        player.jump();
+                    }
+                });
+            }
+
+            startBtn.addEventListener('click', () => {
+                startScreen.classList.add('hidden');
+                gameUI.classList.remove('hidden');
+                init();
+            });
+
+            restartBtn.addEventListener('click', () => {
+                endScreen.classList.add('hidden');
+                gameUI.classList.remove('hidden');
+                init();
+            });
+            
+            window.addEventListener('resize', () => {
+                canvas.width = gameContainer.clientWidth;
+                canvas.height = gameContainer.clientHeight;
+                lanes[0] = canvas.width * 0.25;
+                lanes[1] = canvas.width * 0.5;
+                lanes[2] = canvas.width * 0.75;
+            });
+
+            setupControls();
+        };
+    </script>
+</body>
+</html>
+

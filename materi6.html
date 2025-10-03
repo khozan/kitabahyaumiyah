@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+ <html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الدرس السادس: التمييز</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+    body {
+      background: #f9f9f9;
+      color: #1a1a1a;
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem 1.5rem 3rem;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      color: #00796b;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      border-bottom: 3px solid #00796b;
+      padding-bottom: 0.3rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #004d40;
+    }
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      text-align: justify;
+    }
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    /* Pendahuluan */
+    .intro {
+      background: #b2dfdb;
+      border-radius: 15px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 6px 15px rgb(0 121 107 / 0.3);
+      margin-bottom: 2rem;
+    }
+    .intro svg {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+      fill: #004d40;
+    }
+    .intro-text {
+      font-size: 1.2rem;
+      color: #004d40;
+    }
+    /* Tabel mufrodat */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead {
+      background: #00796b;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #cfd8dc;
+      font-size: 1rem;
+    }
+    tbody tr:hover {
+      background: #e0f2f1;
+    }
+    /* Highlight box */
+    .highlight-box {
+      background: #004d40;
+      color: #e0f2f1;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 8px 20px rgb(0 77 64 / 0.7);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .highlight-box p {
+      margin-bottom: 0.8rem;
+    }
+    .example {
+      background: #b2dfdb;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 0.8rem 0 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #004d40;
+      box-shadow: inset 0 0 8px rgb(0 77 64 / 0.3);
+      line-height: 1.4;
+    }
+    .example-arab {
+      font-size: 1.4rem;
+      font-weight: 700;
+      direction: rtl;
+      margin-bottom: 0.3rem;
+      color: #00332f;
+    }
+    .example-tr {
+      font-style: italic;
+      color: #004d40;
+    }
+    /* Latihan interaktif */
+    .exercise-section {
+      margin-top: 3rem;
+    }
+    .exercise-section h2 {
+      margin-bottom: 1rem;
+    }
+    .quiz {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .quiz h3 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    .quiz-question {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .options li {
+      margin-bottom: 0.6rem;
+    }
+    .options label {
+      cursor: pointer;
+      user-select: none;
+      font-size: 1rem;
+      color: #1a1a1a;
+      background: #e0f2f1;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+    .options input[type="radio"] {
+      display: none;
+    }
+    .options input[type="radio"]:checked + label {
+      background-color: #004d40;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    button.check-btn {
+      margin-top: 1rem;
+      background: #004d40;
+      color: #e0f2f1;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.check-btn:hover,
+    button.check-btn:focus {
+      background: #00332f;
+      outline: none;
+    }
+    .feedback {
+      margin-top: 0.8rem;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .correct {
+      color: #2e7d32;
+    }
+    .wrong {
+      color: #c62828;
+    }
+    .learning-objectives {
+        margin-top: 1.5rem;
+        background: #e0f2f1;
+        padding: 1rem 1.5rem;
+        border-radius: 10px;
+        border-right: 5px solid #004d40;
+    }
+    .learning-objectives ul {
+        list-style-type: '📍';
+        padding-right: 1.5rem;
+    }
+    .learning-objectives li {
+        padding-right: 0.5rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Drag & Drop Styles */
+    .dragdrop {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .dragdrop h3 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    .drop-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .sentence-part {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .drop-zone {
+      background: #e0f2f1;
+      border: 2px dashed #004d40;
+      border-radius: 12px;
+      min-width: 150px;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #004d40;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      font-weight: 700;
+    }
+    .drop-zone.drag-over {
+      background-color: #b2dfdb;
+    }
+    .drop-zone.filled {
+      border-style: solid;
+      background: #004d40;
+      color: #e0f2f1;
+    }
+    .drag-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      border-top: 2px solid #e0f2f1;
+      padding-top: 1.5rem;
+    }
+    .drag-item {
+      background: #b2dfdb;
+      border-radius: 12px;
+      padding: 0.8rem 1.5rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #004d40;
+      user-select: none;
+      box-shadow: 0 4px 10px rgb(0 77 64 / 0.3);
+      cursor: grab;
+      transition: opacity 0.3s ease;
+    }
+    .drag-item:active {
+      cursor: grabbing;
+    }
+    .drag-item.hide {
+      opacity: 0.5;
+    }
+    .play-section {
+        text-align: center;
+        margin-top: 3rem;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+    }
+    .play-btn {
+        background: linear-gradient(45deg, #00796b, #004d40);
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 700;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 121, 107, 0.4);
+    }
+    .play-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 77, 64, 0.5);
+    }
+    
+    /* Game Link Section Style */
+    .game-link-section {
+        text-align: center;
+        margin-bottom: 2rem;
+        background: #e0f2f1;
+        padding: 1.5rem;
+        border-radius: 15px;
+        border: 2px dashed #00796b;
+    }
+    .game-link-section h2 {
+        color: #004d40;
+        border-bottom: none;
+        margin-bottom: 0.5rem;
+    }
+    .game-link-btn {
+        display: inline-block;
+        background: linear-gradient(45deg, #00796b, #004d40);
+        color: white;
+        font-size: 1.1rem;
+        font-weight: 700;
+        border: none;
+        padding: 0.8rem 2rem;
+        border-radius: 50px;
+        cursor: pointer;
+        text-decoration: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 121, 107, 0.4);
+        margin-top: 1rem;
+    }
+    .game-link-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 77, 64, 0.5);
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .intro {
+        flex-direction: column;
+        text-align: center;
+      }
+      .intro svg {
+        margin: 0 auto;
+      }
+    }
+  </style>
+ </head>
+ <body>
+  <h1>الدرس السادس: التمييز</h1>
+
+  <!-- Game Link Section -->
+  <section class="game-link-section" aria-label="Link ke Permainan">
+    <h2>Mari Bermain Game</h2>
+    <p>Sebelum belajar, mari bermain game terlebih dahulu!</p>
+    <a href="game1.html" class="game-link-btn">Mulai Bermain</a>
+  </section>
+
+  <!-- Pendahuluan -->
+  <section class="intro" aria-label="Pendahuluan pelajaran">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <path d="M14 2H6c-1.1 0-1.99.9-1.99 2L4 20c0 1.1.89 2 1.99 2H18c1.1 0 2-.9 2-2V8l-6-6zM6 20V4h7v5h5v11H6z"/>
+        <path d="M0 0h24v24H0z" fill="none"/>
+    </svg>
+    <p class="intro-text">
+        Pada pelajaran keenam ini, kita akan membahas kaidah <strong>Tamyīz (التمييز)</strong>. Tamyiz berfungsi untuk memperjelas kata atau kalimat yang bersifat umum atau samar. Pemahaman ini sangat berguna untuk membuat kalimat yang lebih spesifik dan informatif, terutama dalam konteks kegiatan sehari-hari di tempat kerja.
+    </p>
+  </section>
+
+  <!-- Mufrodat kosa-kata -->
+  <section aria-labelledby="mufrodat-title">
+    <h2 id="mufrodat-title">Kosakata Kegiatan Harian di Tempat Kerja 🏢</h2>
+    <h3>Isim (Benda/Tempat)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>مَكْتَب</td><td>kantor</td><td>كُرْسِيّ</td><td>kursi</td></tr>
+        <tr><td>حَاسُوْب</td><td>komputer</td><td>طَابِعَة</td><td>printer</td></tr>
+        <tr><td>هَاتِف</td><td>telepon</td><td>أَوْرَاق</td><td>kertas</td></tr>
+        <tr><td>إِجْتِمَاع</td><td>rapat</td><td>مُدِير</td><td>direktur</td></tr>
+        <tr><td>مُوَظَّف</td><td>pegawai</td><td>تَقْرِيْر</td><td>laporan</td></tr>
+        <tr><td>مَشْرُوْع</td><td>proyek</td><td>قَهْوَة</td><td>kopi</td></tr>
+        <tr><td>سَاعَة</td><td>jam</td><td>يَوْم العَمَل</td><td>hari kerja</td></tr>
+      </tbody>
+    </table>
+    
+    <h3 style="margin-top: 2rem;">Fi‘il (Kata Kerja)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>كَتَبَ – يَكْتُبُ</td><td>menulis</td><td>قَرَأَ – يَقْرَأُ</td><td>membaca</td></tr>
+        <tr><td>طَبَعَ – يَطْبَعُ</td><td>mencetak</td><td>أَعَدَّ – يُعِدُّ</td><td>menyiapkan</td></tr>
+        <tr><td>نَظَّفَ – يُنَظِّفُ</td><td>membersihkan</td><td>أَرْسَلَ – يُرْسِلُ</td><td>mengirim</td></tr>
+        <tr><td>حَضَرَ – يَحْضُرُ</td><td>menghadiri</td><td>تَكَلَّمَ – يَتَكَلَّمُ</td><td>berbicara</td></tr>
+        <tr><td>بَدَأَ – يَبْدَأُ</td><td>memulai</td><td>اِنْتَهَى – يَنْتَهِي</td><td>selesai</td></tr>
+        <tr><td>عَمِلَ – يَعْمَلُ</td><td>bekerja</td><td>رَجَعَ – يَرْجِعُ</td><td>kembali</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Konsep Tamyiz -->
+  <section aria-labelledby="concept-title">
+    <h2 id="concept-title">Kaidah Pelengkap Jumlah Fi‘liyah: Tamyīz (التمييز)</h2>
+    <div class="highlight-box" tabindex="0" aria-label="Penjelasan Tamyiz">
+      <p><strong>1. Pengertian Tamyiz</strong></p>
+      <p><strong>Tamyīz (التمييز)</strong> adalah isim nakirah manshub yang disebutkan untuk menjelaskan maksud dari kata atau kalimat sebelumnya yang masih global/samar. Tamyiz mengandung makna "dari" (مِنْ).</p>
+      <div class="example" tabindex="0" aria-label="Contoh Tamyiz">
+        <p class="example-arab">اِشْتَرَيْتُ قِنْطَارًا قَمْحًا.</p>
+        <p class="example-tr">(Aku membeli satu kwintal gandum).</p>
+        <p style="font-size: 1rem; color: #004d40; margin-top: 0.5rem;">Di sini, kata <strong style="color: #00332f;">قَمْحًا</strong> (gandum) berfungsi sebagai <em>tamyiz</em> yang menjelaskan kata <strong style="color: #00332f;">قِنْطَارًا</strong> (satu kwintal) yang disebut <em>mumayyaz</em>.</p>
+      </div>
+
+      <p><strong>2. Macam-Macam Mumayyaz</strong></p>
+      <p><strong>a. Mumayyaz Malfuzh (مميز ملفوظ):</strong> Mumayyaz yang lafaznya disebutkan dalam kalimat, biasanya berupa takaran, timbangan, luas, atau bilangan.</p>
+        <ul>
+            <li><strong>Timbangan (Wazan):</strong> وَزَنْتُ كِيْلُوًا بُنًّا (Aku menimbang satu kilo kopi).</li>
+            <li><strong>Takaran (Kail):</strong> شَرِبْتُ كُوْبًا مَاءً (Aku minum segelas air).</li>
+            <li><strong>Luas (Masāhah):</strong> نَظَّفْتُ مِتْرًا أَرْضًا (Aku membersihkan satu meter tanah).</li>
+            <li><strong>Bilangan (‘Adad):</strong> فِي المَكْتَبِ عِشْرُوْنَ مُوَظَّفًا (Di kantor ada 20 pegawai).</li>
+        </ul>
+
+      <p><strong>b. Mumayyaz Malhuzh (مميز ملحوظ):</strong> Mumayyaz tidak disebutkan lafaznya, tetapi dapat dipahami dari konteks kalimat. Biasanya merupakan perubahan dari mubtada’, fa‘il, atau maf‘ul bih.</p>
+        <ul>
+            <li><strong>Perubahan dari Mubtada’:</strong> المُدِيرُ أَكْثَرُ مِنَ الموَظَّفِ خِبْرَةً (Direktur lebih banyak pengalamannya daripada pegawai).</li>
+            <li><strong>Perubahan dari Fa‘il:</strong> طَابَ المُوَظَّفُ نَفْسًا (Pegawai itu baik jiwanya).</li>
+            <li><strong>Perubahan dari Maf‘ul Bih:</strong> نَظَّفْتُ المَكْتَبَ أَرِيْكَةً (Aku membersihkan sofa di kantor).</li>
+        </ul>
+        
+      <hr style="margin: 1.5rem 0; border-color: #00796b;" />
+
+      <p><strong>3. Hukum I‘rab Tamyiz</strong></p>
+      <ul>
+        <li>Tamyiz dari <strong>Mumayyaz Malhuzh</strong> selalu manshub.</li>
+        <li>Tamyiz dari <strong>Mumayyaz Malfuzh</strong> bisa manshub, majrur karena idhafah, atau majrur dengan مِنْ.</li>
+      </ul>
+      <div class="example" tabindex="0" aria-label="Contoh I'rab Tamyiz">
+        <p class="example-arab">اِشْتَرَيْتُ جِرَامًا ذَهَبًا (Manshub)</p>
+        <p class="example-arab">اِشْتَرَيْتُ جِرَامَ ذَهَبٍ (Majrur bil Idhafah)</p>
+        <p class="example-arab">اِشْتَرَيْتُ جِرَامًا مِنْ ذَهَبٍ (Majrur bi Min)</p>
+        <p class="example-tr">(Aku membeli satu gram emas).</p>
+      </div>
+      
+    </div>
+  </section>
+
+    <!-- Latihan Interaktif -->
+    <section class="exercise-section" aria-label="Latihan interaktif">
+      <h2>Latihan Penguatan</h2>
+      <div class="quiz" aria-labelledby="quiz1-title">
+        <h3 id="quiz1-title">Identifikasi Tamyiz</h3>
+        <div class="quiz-question" id="q1">1. Mana kata yang menjadi <em>tamyiz</em> dalam kalimat "أَعْدَدْتُ كُوْبَيْنِ قَهْوَةً"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q1">
+          <li>
+            <input type="radio" id="q1a" name="q1" value="wrong" />
+            <label for="q1a">أَعْدَدْتُ</label>
+          </li>
+          <li>
+            <input type="radio" id="q1b" name="q1" value="wrong" />
+            <label for="q1b">كُوْبَيْنِ</label>
+          </li>
+          <li>
+            <input type="radio" id="q1c" name="q1" value="correct" />
+            <label for="q1c">قَهْوَةً</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q1')">Periksa</button>
+        <div class="feedback" id="feedback-q1" aria-live="polite"></div>
+      </div>
+      <div class="quiz" aria-labelledby="quiz2-title">
+        <h3 id="quiz2-title">Identifikasi Jenis Mumayyaz</h3>
+        <div class="quiz-question" id="q2">2. Apa jenis <em>mumayyaz</em> dalam kalimat "طَابَ المُوَظَّفُ نَفْسًا"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q2">
+          <li>
+            <input type="radio" id="q2a" name="q2" value="wrong" />
+            <label for="q2a">Mumayyaz Malfuzh (Isim 'Adad)</label>
+          </li>
+          <li>
+            <input type="radio" id="q2b" name="q2" value="correct" />
+            <label for="q2b">Mumayyaz Malhuzh (dari Fa'il)</label>
+          </li>
+          <li>
+            <input type="radio" id="q2c" name="q2" value="wrong" />
+            <label for="q2c">Mumayyaz Malfuzh (Isim Wazan)</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q2')">Periksa</button>
+        <div class="feedback" id="feedback-q2" aria-live="polite"></div>
+      </div>
+      <div class="quiz" aria-labelledby="quiz3-title">
+        <h3 id="quiz3-title">Identifikasi Mumayyaz</h3>
+        <div class="quiz-question" id="q3">3. Mana kata yang menjadi <em>mumayyaz</em> dalam kalimat "كَتَبْتُ عَشْرَ رَسَائِلَ"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q3">
+          <li>
+            <input type="radio" id="q3a" name="q3" value="wrong" />
+            <label for="q3a">كَتَبْتُ</label>
+          </li>
+          <li>
+            <input type="radio" id="q3b" name="q3" value="correct" />
+            <label for="q3b">عَشْرَ</label>
+          </li>
+          <li>
+            <input type="radio" id="q3c" name="q3" value="wrong" />
+            <label for="q3c">رَسَائِلَ</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q3')">Periksa</button>
+        <div class="feedback" id="feedback-q3" aria-live="polite"></div>
+      </div>
+      <div class="quiz" aria-labelledby="quiz4-title">
+        <h3 id="quiz4-title">Hukum I'rab Tamyiz</h3>
+        <div class="quiz-question" id="q4">4. Manakah hukum i'rab yang benar untuk <em>tamyiz</em> dari <em>Mumayyaz Malfuzh</em> (selain bilangan)?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q4">
+          <li>
+            <input type="radio" id="q4a" name="q4" value="wrong" />
+            <label for="q4a">Selalu manshub</label>
+          </li>
+          <li>
+            <input type="radio" id="q4b" name="q4" value="wrong" />
+            <label for="q4b">Selalu majrur</label>
+          </li>
+          <li>
+            <input type="radio" id="q4c" name="q4" value="correct" />
+            <label for="q4c">Boleh manshub atau majrur</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q4')">Periksa</button>
+        <div class="feedback" id="feedback-q4" aria-live="polite"></div>
+      </div>
+
+      <!-- Drag and Drop Exercise -->
+      <div class="dragdrop" aria-labelledby="dragdrop-title">
+        <h3 id="dragdrop-title">Latihan Drag & Drop: Pasangkan Mumayyaz dengan Tamyiz yang Sesuai</h3>
+        <div class="drop-container">
+            <div class="sentence-part">فِي المَكْتَبِ عِشْرُوْنَ <div class="drop-zone" data-correct="مُوَظَّفًا"></div></div>
+            <div class="sentence-part">شَرِبْتُ كُوْبًا <div class="drop-zone" data-correct="مَاءً"></div></div>
+            <div class="sentence-part">وَزَنْتُ كِيْلُوًا <div class="drop-zone" data-correct="بُنًّا"></div></div>
+        </div>
+        <p style="text-align: center; font-weight: 600; color: #004d40;">Pindahkan kata di bawah ini ke tempat yang benar:</p>
+        <div class="drag-options">
+            <div class="drag-item" draggable="true">بُنًّا</div>
+            <div class="drag-item" draggable="true">مُوَظَّفًا</div>
+            <div class="drag-item" draggable="true">مَاءً</div>
+        </div>
+        <div style="text-align: center;">
+            <button class="check-btn" onclick="checkDragDrop()">Periksa Jawaban</button>
+        </div>
+        <div class="feedback" id="feedback-dragdrop" aria-live="polite" style="text-align: center;"></div>
+      </div>
+
+    </section>
+
+    <!-- Evaluasi Akhir -->
+     <section class="final-quiz" aria-label="Evaluasi akhir">
+       <h2>التقييم النهائي: اختبار فهم التمييز</h2>
+       <form id="finalQuizForm" aria-describedby="finalQuizDesc">
+         <p id="finalQuizDesc">أجب عن الأسئلة التالية لاختبار مدى فهمك.</p>
+         <ol style="list-style-type: decimal; padding-right: 20px;">
+           <li style="margin-bottom: 1rem;">
+             <p>ما هو تعريف التمييز؟</p>
+             <label><input type="radio" name="qf1" value="correct" required /> اسم نكرة منصوب يوضح كلمة أو جملة مبهمة قبله</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> اسم يدل على من فعل الفعل</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> اسم يدل على مكان أو زمان الفعل</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "فِي الشَّرِكَةِ ثَلَاثُونَ مُوَظَّفًا"، أي كلمة هي التمييز؟</p>
+             <label><input type="radio" name="qf2" value="wrong" required /> الشَّرِكَةِ</label><br />
+             <label><input type="radio" name="qf2" value="wrong" /> ثَلَاثُونَ</label><br />
+             <label><input type="radio" name="qf2" value="correct" /> مُوَظَّفًا</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>المميز الذي يلفظ في الكلام (مثل الوزن، الكيل، العدد) يسمى...</p>
+             <label><input type="radio" name="qf3" value="correct" required /> مميز ملفوظ</label><br />
+             <label><input type="radio" name="qf3" value="wrong" /> مميز ملحوظ</label><br />
+             <label><input type="radio" name="qf3" value="wrong" /> مميز محذوف</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>ما هو حكم إعراب تمييز المميز الملحوظ؟</p>
+             <label><input type="radio" name="qf4" value="correct" required /> النصب دائمًا</label><br />
+             <label><input type="radio" name="qf4" value="wrong" /> يجوز نصبه أو جره</label><br />
+             <label><input type="radio" name="qf4" value="wrong" /> الرفع دائمًا</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>جملة "المُدِيرُ أَكْثَرُ مِنَ الموَظَّفِ خِبْرَةً" تحتوي على تمييز مميزه...</p>
+             <label><input type="radio" name="qf5" value="correct" required /> ملحوظ</label><br />
+             <label><input type="radio" name="qf5" value="wrong" /> ملفوظ (عدد)</label><br />
+             <label><input type="radio" name="qf5" value="wrong" /> ملفوظ (وزن)</label>
+           </li>
+         </ol>
+         <button type="submit" class="check-btn">إرسال الإجابات</button>
+         <div id="finalScore" class="score" aria-live="polite" style="margin-top:1rem; font-weight:700; font-size:1.2rem;"></div>
+       </form>
+     </section>
+     
+    <!-- Tombol Latihan Bermain -->
+    <section class="play-section" aria-label="Latihan Bermain">
+        <h2>Ingin Latihan Lebih Seru?</h2>
+        <p>Uji pemahamanmu tentang Tamyiz melalui permainan interaktif!</p>
+        <a href="latihan1.html" class="game-link-btn">Mulai Bermain</a>
+    </section>
+
+  <script>
+    // Quiz check function
+    function checkQuiz(qname) {
+      const options = document.getElementsByName(qname);
+      let selected = null;
+      for (const opt of options) {
+        if (opt.checked) {
+          selected = opt;
+          break;
+        }
+      }
+      const feedback = document.getElementById('feedback-' + qname);
+      if (!selected) {
+        feedback.textContent = 'Silakan pilih jawaban.';
+        feedback.className = 'feedback wrong';
+        return;
+      }
+      if (selected.value === 'correct') {
+        feedback.textContent = 'Jawaban benar! ✅';
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = 'Jawaban salah. Coba lagi.';
+        feedback.className = 'feedback wrong';
+      }
+    }
+
+    // Drag & Drop logic
+    const dragItems = document.querySelectorAll('.drag-item');
+    const dropZones = document.querySelectorAll('.drop-zone');
+    let draggedItem = null;
+
+    dragItems.forEach(item => {
+        item.addEventListener('dragstart', function() {
+            draggedItem = this;
+            setTimeout(() => {
+                this.classList.add('hide');
+            }, 0);
+        });
+        item.addEventListener('dragend', function() {
+            this.classList.remove('hide');
+        });
+    });
+
+    dropZones.forEach(zone => {
+        zone.addEventListener('dragover', function(e) {
+            e.preventDefault();
+            this.classList.add('drag-over');
+        });
+        zone.addEventListener('dragleave', function() {
+            this.classList.remove('drag-over');
+        });
+        zone.addEventListener('drop', function(e) {
+            e.preventDefault();
+            this.classList.remove('drag-over');
+            if (draggedItem) {
+                // if the drop zone is already filled, move the text back to options
+                if (this.textContent !== '') {
+                    const originalItem = document.createElement('div');
+                    originalItem.classList.add('drag-item');
+                    originalItem.setAttribute('draggable', 'true');
+                    originalItem.textContent = this.textContent;
+                    document.querySelector('.drag-options').appendChild(originalItem);
+                    // re-add event listeners to the returned item
+                    addDragEvents(originalItem);
+                }
+                this.textContent = draggedItem.textContent;
+                this.classList.add('filled');
+                draggedItem.remove();
+            }
+        });
+    });
+    
+    function addDragEvents(item){
+        item.addEventListener('dragstart', function() {
+            draggedItem = this;
+            setTimeout(() => {
+                this.classList.add('hide');
+            }, 0);
+        });
+        item.addEventListener('dragend', function() {
+            this.classList.remove('hide');
+        });
+    }
+
+    function checkDragDrop() {
+        const feedback = document.getElementById('feedback-dragdrop');
+        let correctCount = 0;
+        const totalZones = dropZones.length;
+        dropZones.forEach(zone => {
+            const correctText = zone.getAttribute('data-correct');
+            if (zone.textContent.trim() === correctText) {
+                zone.style.borderColor = '#2e7d32';
+                correctCount++;
+            } else {
+                zone.style.borderColor = '#c62828';
+            }
+        });
+
+        if (correctCount === totalZones) {
+            feedback.textContent = 'Jawaban benar semua! Luar biasa! ✅';
+            feedback.className = 'feedback correct';
+        } else {
+            feedback.textContent = `Ada ${correctCount} dari ${totalZones} jawaban yang benar. Coba perbaiki.`;
+            feedback.className = 'feedback wrong';
+        }
+    }
+
+
+    // Final quiz submission
+    document.getElementById('finalQuizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const totalQuestions = 5;
+      let score = 0;
+      for (let i = 1; i <= totalQuestions; i++) {
+        const qName = 'qf' + i;
+        const options = form.elements[qName];
+        if (options) {
+             for (const opt of options) {
+                if (opt.checked && opt.value === 'correct') {
+                    score++;
+                }
+            }
+        }
+      }
+      const scoreDiv = document.getElementById('finalScore');
+      scoreDiv.textContent = `Skor Anda: ${score} dari ${totalQuestions} (${Math.round((score/totalQuestions)*100)}%)`;
+      if(score === totalQuestions) {
+        scoreDiv.style.color = '#2e7d32';
+      } else if(score >= totalQuestions/2) {
+        scoreDiv.style.color = '#f9a825';
+      } else {
+        scoreDiv.style.color = '#c62828';
+      }
+      scoreDiv.scrollIntoView({behavior: 'smooth'});
+    });
+  </script>
+ </body>
+ </html>
+
