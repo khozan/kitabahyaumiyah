@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+ <html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الدرس السابع: الجملة الاسمية</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+    body {
+      background: #f9f9f9;
+      color: #1a1a1a;
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem 1.5rem 3rem;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      color: #00796b;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      border-bottom: 3px solid #00796b;
+      padding-bottom: 0.3rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #004d40;
+    }
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      text-align: justify;
+    }
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    /* Pendahuluan */
+    .intro {
+      background: #b2dfdb;
+      border-radius: 15px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 6px 15px rgb(0 121 107 / 0.3);
+      margin-bottom: 2rem;
+    }
+    .intro svg {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+      fill: #004d40;
+    }
+    .intro-text {
+      font-size: 1.2rem;
+      color: #004d40;
+    }
+    /* Tabel mufrodat */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead {
+      background: #00796b;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #cfd8dc;
+      font-size: 1rem;
+    }
+    tbody tr:hover {
+      background: #e0f2f1;
+    }
+    /* Highlight box */
+    .highlight-box {
+      background: #004d40;
+      color: #e0f2f1;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 8px 20px rgb(0 77 64 / 0.7);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .highlight-box p {
+      margin-bottom: 0.8rem;
+    }
+    .highlight-box ul {
+        margin-right: 1.5rem;
+        margin-left: 0;
+    }
+    .example {
+      background: #b2dfdb;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 0.8rem 0 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #004d40;
+      box-shadow: inset 0 0 8px rgb(0 77 64 / 0.3);
+      line-height: 1.4;
+    }
+    .example-arab {
+      font-size: 1.4rem;
+      font-weight: 700;
+      direction: rtl;
+      margin-bottom: 0.3rem;
+      color: #00332f;
+    }
+    .example-tr {
+      font-style: italic;
+      color: #004d40;
+    }
+    /* Latihan interaktif */
+    .exercise-section {
+      margin-top: 3rem;
+    }
+    .exercise-section h2 {
+      margin-bottom: 1rem;
+    }
+    .quiz {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .quiz h3 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    .quiz-question {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .options li {
+      margin-bottom: 0.6rem;
+    }
+    .options label {
+      cursor: pointer;
+      user-select: none;
+      font-size: 1rem;
+      color: #1a1a1a;
+      background: #e0f2f1;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+    .options input[type="radio"] {
+      display: none;
+    }
+    .options input[type="radio"]:checked + label {
+      background-color: #004d40;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    button.check-btn {
+      margin-top: 1rem;
+      background: #004d40;
+      color: #e0f2f1;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.check-btn:hover,
+    button.check-btn:focus {
+      background: #00332f;
+      outline: none;
+    }
+    .feedback {
+      margin-top: 0.8rem;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .correct {
+      color: #2e7d32;
+    }
+    .wrong {
+      color: #c62828;
+    }
+    /* Learning Objectives */
+    .learning-objectives {
+        margin-bottom: 2rem;
+        background: #e0f2f1;
+        padding: 1.5rem 2rem;
+        border-radius: 10px;
+        border-right: 5px solid #004d40;
+    }
+    .learning-objectives ul {
+        list-style-type: '🎯';
+        padding-right: 1.5rem;
+        margin-bottom: 0;
+    }
+    .learning-objectives li {
+        padding-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    .learning-objectives h3 {
+        margin-top: 0;
+    }
+
+    /* Drag & Drop Styles */
+    .dragdrop {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .dragdrop h3 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    .drop-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .sentence-part {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .drop-zone {
+      background: #e0f2f1;
+      border: 2px dashed #004d40;
+      border-radius: 12px;
+      min-width: 150px;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #004d40;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      font-weight: 700;
+    }
+    .drop-zone.drag-over {
+      background-color: #b2dfdb;
+    }
+    .drop-zone.filled {
+      border-style: solid;
+      background: #004d40;
+      color: #e0f2f1;
+    }
+    .drag-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      border-top: 2px solid #e0f2f1;
+      padding-top: 1.5rem;
+    }
+    .drag-item {
+      background: #b2dfdb;
+      border-radius: 12px;
+      padding: 0.8rem 1.5rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #004d40;
+      user-select: none;
+      box-shadow: 0 4px 10px rgb(0 77 64 / 0.3);
+      cursor: grab;
+      transition: opacity 0.3s ease;
+    }
+    .drag-item:active {
+      cursor: grabbing;
+    }
+    .drag-item.hide {
+      opacity: 0.5;
+    }
+    .play-section {
+        text-align: center;
+        margin-top: 3rem;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+    }
+    .play-btn {
+        background: linear-gradient(45deg, #00796b, #004d40);
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 700;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 121, 107, 0.4);
+    }
+    .play-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 77, 64, 0.5);
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .intro {
+        flex-direction: column;
+        text-align: center;
+      }
+      .intro svg {
+        margin: 0 auto;
+      }
+    }
+  </style>
+ </head>
+ <body>
+  <h1>الدرس السابع: الجملة الاسمية</h1>
+
+  <!-- Pendahuluan -->
+  <section class="intro" aria-label="Pendahuluan pelajaran">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zM4 18V6h16v12H4z"/>
+        <path d="M6 10h4v6H6z" fill-opacity="0.3"/>
+        <path d="M12 10h6v2h-6zM12 14h6v2h-6z"/>
+    </svg>
+    <p class="intro-text">
+        <strong>Pengantar Jumlah Ismiyah (الجملة الاسمية)</strong><br>
+        Jumlah Ismiyah adalah kalimat yang dimulai dengan <em>isim</em> (kata benda). Struktur dasarnya adalah <strong>Mubtada’ + Khabar</strong> (Subjek + Predikat). Tipe kalimat ini digunakan untuk menyatakan keadaan, sifat, atau deskripsi.
+    </p>
+  </section>
+
+  <!-- Tujuan Pembelajaran -->
+  <section class="learning-objectives" aria-label="Tujuan Pembelajaran">
+    <h3 style="color: #004d40;">Tujuan Pembelajaran</h3>
+    <p style="margin-bottom: 0.5rem;">Setelah mempelajari materi ini, mahasiswa diharapkan mampu:</p>
+    <ul>
+      <li>Menjelaskan konsep dan struktur dasar jumlah ismiyah.</li>
+      <li>Mengidentifikasi mubtada’ dan khabar dalam kalimat.</li>
+      <li>Menggunakan jumlah ismiyah sederhana untuk menulis cerita pendek bertema kehidupan sehari-hari.</li>
+    </ul>
+  </section>
+
+  <!-- Mufrodat kosa-kata -->
+  <section aria-labelledby="mufrodat-title">
+    <h2 id="mufrodat-title">Kosakata Cerita Pendek & Kehidupan Sehari-hari </h2>
+    <h3>Isim (Benda/Tempat)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>قِصَّة</td><td>cerita</td><td>جَامِعَة</td><td>universitas</td></tr>
+        <tr><td>طَالِب</td><td>mahasiswa</td><td>أُسْتَاذ</td><td>dosen</td></tr>
+        <tr><td>فَصْل</td><td>kelas</td><td>مَكْتَب</td><td>kantor/meja</td></tr>
+        <tr><td>كِتَاب</td><td>buku</td><td>قَلَم</td><td>pena</td></tr>
+        <tr><td>سَبُّوْرَة</td><td>papan tulis</td><td>نَافِذَة</td><td>jendela</td></tr>
+        <tr><td>جَوّ</td><td>suasana</td><td>زَمِيْل</td><td>teman</td></tr>
+      </tbody>
+    </table>
+    
+    <h3 style="margin-top: 2rem;">Fi‘il (Kata Kerja)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>كَتَبَ – يَكْتُبُ</td><td>menulis</td><td>قَرَأَ – يَقْرَأُ</td><td>membaca</td></tr>
+        <tr><td>دَرَسَ – يَدْرُسُ</td><td>belajar</td><td>فَهِمَ – يَفْهَمُ</td><td>memahami</td></tr>
+        <tr><td>جَلَسَ – يَجْلِسُ</td><td>duduk</td><td>وَقَفَ – يَقِفُ</td><td>berdiri</td></tr>
+        <tr><td>دَخَلَ – يَدْخُلُ</td><td>masuk</td><td>خَرَجَ – يَخْرُجُ</td><td>keluar</td></tr>
+        <tr><td>تَكَلَّمَ – يَتَكَلَّمُ</td><td>berbicara</td><td>سَمِعَ – يَسْمَعُ</td><td>mendengar</td></tr>
+        <tr><td>بَدَأَ – يَبْدَأُ</td><td>memulai</td><td>اِنْتَهَى – يَنْتَهِي</td><td>selesai</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Konsep Tamyiz -->
+  <section aria-labelledby="concept-title">
+    <h2 id="concept-title">Kaidah Jumlah Ismiyah (الجملة الاسمية)</h2>
+    <div class="highlight-box" tabindex="0" aria-label="Penjelasan Tamyiz">
+      <p><strong>1. Struktur Dasar (Mubtada' & Khabar)</strong></p>
+      <p>Kalimat ismiyah terdiri dari <strong>Mubtada’ (مبتدأ)</strong> sebagai subjek dan <strong>Khabar (خبر)</strong> sebagai predikat.</p>
+        <ul>
+            <li><strong>Mubtada' (Subjek):</strong> Pokok pembicaraan. Contoh: البِنْتُ (Anak perempuan).</li>
+            <li><strong>Khabar (Predikat):</strong> Menjelaskan keadaan mubtada'. Contoh: جَمِيْلَةٌ (Cantik).</li>
+        </ul>
+      <div class="example" tabindex="0" aria-label="Contoh Struktur">
+        <p class="example-arab">البِنْتُ جَمِيْلَةٌ.</p>
+        <p class="example-tr">(Anak perempuan itu cantik).</p>
+      </div>
+
+      <p><strong>2. Jenis-Jenis Khabar</strong></p>
+        <ul>
+            <li><strong>Khabar Mufrad (satu kata):</strong> <br>الأُسْتَاذُ مَرِيْضٌ (Dosen itu sakit).</li>
+            <li><strong>Khabar Jumlah (kalimat):</strong> <br>الطَّالِبُ يَدْرُسُ (Mahasiswa itu sedang belajar).</li>
+            <li><strong>Khabar Syibhul Jumlah (frasa):</strong> <br>الكِتَابُ عَلَى المَكْتَبِ (Buku itu di atas meja).</li>
+        </ul>
+        
+      <p><strong>3. Contoh Berdasarkan Bentuk</strong></p>
+        <ul>
+            <li><strong>Mufrad (tunggal):</strong> البِنْتُ نَشِيْطَةٌ (Anak perempuan itu rajin).</li>
+            <li><strong>Mutsanna (dua):</strong> الطَّالِبَانِ مُجْتَهِدَانِ (Dua mahasiswa itu rajin).</li>
+            <li><strong>Jamak (banyak):</strong> الطَّالِبَاتُ مُؤَدَّبَاتٌ (Para mahasiswi itu sopan).</li>
+        </ul>
+
+      <hr style="margin: 1.5rem 0; border-color: #00796b;" />
+
+      <p><strong>4. Contoh dalam Cerita Pendek</strong></p>
+      <div class="example" tabindex="0" aria-label="Contoh Cerita Pendek">
+        <p class="example-arab" style="text-align: center; font-size: 1.5rem;">يَوْمٌ جَمِيْلٌ فِي الجَامِعَةِ</p>
+        <p class="example-arab">اَلْيَوْمُ جَمِيْلٌ. الطَّالِبُ فِي الفَصْلِ، وَالأُسْتَاذُ فِي المَكْتَبِ. الكِتَابُ عَلَى المَكْتَبِ. الفَصْلُ نَظِيْفٌ، وَالْجَوُّ هادِئٌ.</p>
+        <p class="example-tr" style="text-align: justify;">(Hari ini indah. Mahasiswa di kelas, dan dosen di kantor. Buku di atas meja. Kelas bersih, dan suasana tenang).</p>
+      </div>
+
+       <p><strong>5. Kaidah I‘rab Singkat</strong></p>
+        <ul>
+            <li><strong>Mubtada’:</strong> Selalu marfu‘ (contoh: الطَّالِبُ).</li>
+            <li><strong>Khabar:</strong> Juga marfu‘ jika berbentuk mufrad (contoh: مُجْتَهِدٌ).</li>
+        </ul>
+    </div>
+  </section>
+
+    <!-- Latihan Interaktif -->
+    <section class="exercise-section" aria-label="Latihan interaktif">
+      <h2>Latihan Penguatan</h2>
+      <div class="quiz" aria-labelledby="quiz1-title">
+        <h3 id="quiz1-title">Identifikasi Mubtada'</h3>
+        <div class="quiz-question" id="q1">1. Mana kata yang menjadi <em>mubtada’</em> dalam kalimat "الطَّالِبُ مُجْتَهِدٌ"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q1">
+          <li>
+            <input type="radio" id="q1a" name="q1" value="correct" />
+            <label for="q1a">الطَّالِبُ</label>
+          </li>
+          <li>
+            <input type="radio" id="q1b" name="q1" value="wrong" />
+            <label for="q1b">مُجْتَهِدٌ</label>
+          </li>
+          <li>
+            <input type="radio" id="q1c" name="q1" value="wrong" />
+            <label for="q1c">Kalimat fi'liyah</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q1')">Periksa</button>
+        <div class="feedback" id="feedback-q1" aria-live="polite"></div>
+      </div>
+      
+      <div class="quiz" aria-labelledby="quiz2-title">
+        <h3 id="quiz2-title">Identifikasi Khabar</h3>
+        <div class="quiz-question" id="q2">2. Mana kata yang menjadi <em>khabar</em> dalam kalimat "الفَصْلُ نَظِيْفٌ"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q2">
+          <li>
+            <input type="radio" id="q2a" name="q2" value="wrong" />
+            <label for="q2a">الفَصْلُ</label>
+          </li>
+          <li>
+            <input type="radio" id="q2b" name="q2" value="wrong" />
+            <label for="q2b">Mubtada'</label>
+          </li>
+          <li>
+            <input type="radio" id="q2c" name="q2" value="correct" />
+            <label for="q2c">نَظِيْفٌ</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q2')">Periksa</button>
+        <div class="feedback" id="feedback-q2" aria-live="polite"></div>
+      </div>
+      
+      <div class="quiz" aria-labelledby="quiz3-title">
+        <h3 id="quiz3-title">Identifikasi Jenis Khabar</h3>
+        <div class="quiz-question" id="q3">3. Apa jenis <em>khabar</em> dalam kalimat "الكِتَابُ عَلَى المَكْتَبِ"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q3">
+          <li>
+            <input type="radio" id="q3a" name="q3" value="wrong" />
+            <label for="q3a">Khabar Mufrad</label>
+          </li>
+          <li>
+            <input type="radio" id="q3b" name="q3" value="wrong" />
+            <label for="q3b">Khabar Jumlah</label>
+          </li>
+          <li>
+            <input type="radio" id="q3c" name="q3" value="correct" />
+            <label for="q3c">Khabar Syibhul Jumlah</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q3')">Periksa</button>
+        <div class="feedback" id="feedback-q3" aria-live="polite"></div>
+      </div>
+      
+      <div class="quiz" aria-labelledby="quiz4-title">
+        <h3 id="quiz4-title">Identifikasi Jenis Khabar</h3>
+        <div class="quiz-question" id="q4">4. Apa jenis <em>khabar</em> dalam kalimat "الطَّالِبُ يَدْرُسُ"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q4">
+          <li>
+            <input type="radio" id="q4a" name="q4" value="wrong" />
+            <label for="q4a">Khabar Mufrad</label>
+          </li>
+          <li>
+            <input type="radio" id="q4b" name="q4" value="correct" />
+            <label for="q4b">Khabar Jumlah Fi'liyah</label>
+          </li>
+          <li>
+            <input type="radio" id="q4c" name="q4" value="wrong" />
+            <label for="q4c">Khabar Syibhul Jumlah</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q4')">Periksa</button>
+        <div class="feedback" id="feedback-q4" aria-live="polite"></div>
+      </div>
+
+      <!-- Drag and Drop Exercise -->
+      <div class="dragdrop" aria-labelledby="dragdrop-title">
+        <h3 id="dragdrop-title">Latihan Drag & Drop: Susun Kalimat Ismiyah</h3>
+        <p style="text-align: center; font-weight: 600; color: #004d40;">Pasangkan Mubtada' dengan Khabar yang sesuai:</p>
+        <div class="drop-container">
+            <div class="sentence-part">البِنْتُ <div class="drop-zone" data-correct="جَمِيْلَةٌ"></div></div>
+            <div class="sentence-part">الفَصْلُ <div class="drop-zone" data-correct="نَظِيْفٌ"></div></div>
+            <div class="sentence-part">الطَّالِبَانِ <div class="drop-zone" data-correct="مُجْتَهِدَانِ"></div></div>
+        </div>
+        <div class="drag-options">
+            <div class="drag-item" draggable="true">مُجْتَهِدَانِ</div>
+            <div class="drag-item" draggable="true">نَظِيْفٌ</div>
+            <div class="drag-item" draggable="true">جَمِيْلَةٌ</div>
+        </div>
+        <div style="text-align: center;">
+            <button class="check-btn" onclick="checkDragDrop()">Periksa Jawaban</button>
+        </div>
+        <div class="feedback" id="feedback-dragdrop" aria-live="polite" style="text-align: center;"></div>
+      </div>
+
+    </section>
+
+    <!-- Evaluasi Akhir -->
+     <section class="final-quiz" aria-label="Evaluasi akhir">
+       <h2>التقييم النهائي: اختبار فهم الجملة الاسمية</h2>
+       <form id="finalQuizForm" aria-describedby="finalQuizDesc">
+         <p id="finalQuizDesc">أجب عن الأسئلة التالية لاختبار مدى فهمك.</p>
+         <ol style="list-style-type: decimal; padding-right: 20px;">
+           <li style="margin-bottom: 1rem;">
+             <p>ما هي الجملة الاسمية؟</p>
+             <label><input type="radio" name="qf1" value="correct" required /> الجملة التي تبدأ باسم (مبتدأ)</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> الجملة التي تبدأ بفعل</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> الجملة التي تحتوي على مفعول به</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>ما هما الركنان الأساسيان للجملة الاسمية؟</p>
+             <label><input type="radio" name="qf2" value="wrong" required /> الفعل والفاعل</label><br />
+             <label><input type="radio" name="qf2" value="correct" /> المبتدأ والخبر</label><br />
+             <label><input type="radio" name="qf2" value="wrong" /> المفعول به والفاعل</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "الأُسْتَاذُ مَرِيْضٌ"، ما نوع الخبر؟</p>
+             <label><input type="radio" name="qf3" value="correct" required /> خبر مفرد</label><br />
+             <label><input type="radio" name="qf3" value="wrong" /> خبر جملة</label><br />
+             <label><input type="radio" name="qf3" value="wrong" /> خبر شبه جملة</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "الكِتَابُ عَلَى المَكْتَبِ"، ما نوع الخبر؟</p>
+             <label><input type="radio" name="qf4" value="wrong" required /> خبر مفرد</label><br />
+             <label><input type="radio" name="qf4" value="wrong" /> خبر جملة</label><br />
+             <label><input type="radio" name="qf4" value="correct" /> خبر شبه جملة</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>ما هو إعراب المبتدأ والخبر المفرد؟</p>
+ L             <label><input type="radio" name="qf5" value="wrong" /> منصوبان (بالفتحة)</label><br />
+             <label><input type="radio" name="qf5" value="correct" /> مرفوعان (بالضمة)</label><br />
+             <label><input type="radio" name="qf5" value="wrong" /> مجروران (بالكسرة)</label>
+           </li>
+         </ol>
+         <button type="submit" class="check-btn">إرسال الإجابات</button>
+         <div id="finalScore" class="score" aria-live="polite" style="margin-top:1rem; font-weight:700; font-size:1.2rem;"></div>
+       </form>
+     </section>
+     
+    <!-- Tombol Latihan Bermain -->
+    <section class="play-section" aria-label="Latihan Bermain">
+        <h2>Ingin Latihan Lebih Seru?</h2>
+        <p>Uji pemahamanmu tentang Jumlah Ismiyah melalui permainan interaktif!</p>
+        <button class="play-btn" onclick="alert('Fitur permainan akan segera hadir!')">▶️ Mulai Bermain & Berlatih</button>
+    </section>
+
+  <script>
+    // Quiz check function
+    function checkQuiz(qname) {
+      const options = document.getElementsByName(qname);
+      let selected = null;
+      for (const opt of options) {
+        if (opt.checked) {
+          selected = opt;
+          break;
+        }
+      }
+      const feedback = document.getElementById('feedback-' + qname);
+      if (!selected) {
+        feedback.textContent = 'Silakan pilih jawaban.';
+        feedback.className = 'feedback wrong';
+        return;
+      }
+      if (selected.value === 'correct') {
+        feedback.textContent = 'Jawaban benar! ✅';
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = 'Jawaban salah. Coba lagi.';
+        feedback.className = 'feedback wrong';
+      }
+    }
+
+    // Drag & Drop logic
+    let draggedItem = null;
+
+    function initializeDragDrop() {
+        const items = document.querySelectorAll('.drag-item');
+        const zones = document.querySelectorAll('.drop-zone');
+
+        items.forEach(item => {
+            addDragEvents(item);
+        });
+
+        zones.forEach(zone => {
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            });
+            zone.addEventListener('dragleave', function() {
+                this.classList.remove('drag-over');
+            });
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                if (draggedItem) {
+                    // if the drop zone is already filled, move the text back to options
+                    if (this.textContent !== '' && this.textContent !== draggedItem.textContent) {
+                        const originalItem = document.createElement('div');
+                        originalItem.classList.add('drag-item');
+                        originalItem.setAttribute('draggable', 'true');
+                        originalItem.textContent = this.textContent;
+                        document.querySelector('.drag-options').appendChild(originalItem);
+                        addDragEvents(originalItem);
+                    }
+                    this.textContent = draggedItem.textContent;
+                    this.classList.add('filled');
+                    
+                    // Only remove if it was dragged from the options
+                    if (draggedItem.parentElement.classList.contains('drag-options')) {
+                         draggedItem.remove();
+                    } else {
+                        // if dragged from another zone, clear the other zone
+                        if (draggedItem.parentElement.classList.contains('drop-zone')) {
+                            draggedItem.parentElement.textContent = '';
+                            draggedItem.parentElement.classList.remove('filled');
+                        }
+                    }
+                    draggedItem = null;
+                }
+            });
+        });
+    }
+    
+    function addDragEvents(item){
+        item.addEventListener('dragstart', function() {
+            draggedItem = this;
+            setTimeout(() => {
+                if(item.parentElement.classList.contains('drag-options')) {
+                    item.classList.add('hide');
+                }
+            }, 0);
+        });
+        item.addEventListener('dragend', function() {
+            item.classList.remove('hide');
+        });
+    }
+
+    function checkDragDrop() {
+        const feedback = document.getElementById('feedback-dragdrop');
+        let correctCount = 0;
+        const zones = document.querySelectorAll('.drop-zone');
+        const totalZones = zones.length;
+        
+        zones.forEach(zone => {
+            const correctText = zone.getAttribute('data-correct');
+            if (zone.textContent.trim() === correctText) {
+                zone.style.borderColor = '#2e7d32';
+                correctCount++;
+            } else {
+                zone.style.borderColor = '#c62828';
+            }
+        });
+
+        if (correctCount === totalZones) {
+            feedback.textContent = 'Jawaban benar semua! Luar biasa! ✅';
+            feedback.className = 'feedback correct';
+        } else {
+            feedback.textContent = `Ada ${correctCount} dari ${totalZones} jawaban yang benar. Coba perbaiki.`;
+            feedback.className = 'feedback wrong';
+        }
+    }
+    
+    // Initialize drag and drop
+    initializeDragDrop();
+
+
+    // Final quiz submission
+    document.getElementById('finalQuizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const totalQuestions = 5;
+      let score = 0;
+      for (let i = 1; i <= totalQuestions; i++) {
+        const qName = 'qf' + i;
+        const options = form.elements[qName];
+        if (options) {
+             for (const opt of options) {
+                if (opt.checked && opt.value === 'correct') {
+                    score++;
+                }
+            }
+        }
+      }
+      const scoreDiv = document.getElementById('finalScore');
+      scoreDiv.textContent = `Skor Anda: ${score} dari ${totalQuestions} (${Math.round((score/totalQuestions)*100)}%)`;
+      if(score === totalQuestions) {
+        scoreDiv.style.color = '#2e7d32';
+      } else if(score >= totalQuestions/2) {
+        scoreDiv.style.color = '#f9a825';
+      } else {
+        scoreDiv.style.color = '#c62828';
+      }
+      scoreDiv.scrollIntoView({behavior: 'smooth'});
+    });
+  </script>
+ </body>
+ </html>
