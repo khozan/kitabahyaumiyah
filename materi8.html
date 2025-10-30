@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+ <html lang="ar" dir="rtl">
+ <head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الدرس الثامن: النعت والبدل</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+    * {
+      box-sizing: border-box;
+      margin: 0; padding: 0;
+      font-family: 'Cairo', sans-serif;
+    }
+    body {
+      background: #f9f9f9;
+      color: #1a1a1a;
+      max-width: 900px;
+      margin: auto;
+      padding: 1rem 1.5rem 3rem;
+      line-height: 1.6;
+    }
+    h1, h2, h3, h4 {
+      color: #00796b;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+    h1 {
+      font-size: 2.4rem;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 2rem;
+      border-bottom: 3px solid #00796b;
+      padding-bottom: 0.3rem;
+    }
+    h3 {
+      font-size: 1.3rem;
+      margin-top: 1.5rem;
+      margin-bottom: 0.8rem;
+      color: #004d40;
+    }
+    p {
+      margin-bottom: 1rem;
+      font-size: 1.1rem;
+      text-align: justify;
+    }
+    ul {
+      margin-left: 1.2rem;
+      margin-bottom: 1rem;
+    }
+    /* Pendahuluan */
+    .intro {
+      background: #b2dfdb;
+      border-radius: 15px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      box-shadow: 0 6px 15px rgb(0 121 107 / 0.3);
+      margin-bottom: 2rem;
+    }
+    .intro svg {
+      width: 70px;
+      height: 70px;
+      flex-shrink: 0;
+      fill: #004d40;
+    }
+    .intro-text {
+      font-size: 1.2rem;
+      color: #004d40;
+    }
+    /* Tabel mufrodat */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      box-shadow: 0 4px 12px rgb(0 0 0 / 0.05);
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    thead {
+      background: #00796b;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    th, td {
+      padding: 0.8rem 1rem;
+      text-align: center;
+      border-bottom: 1px solid #cfd8dc;
+      font-size: 1rem;
+    }
+    tbody tr:hover {
+      background: #e0f2f1;
+    }
+    /* Highlight box */
+    .highlight-box {
+      background: #004d40;
+      color: #e0f2f1;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      margin-top: 1.5rem;
+      box-shadow: 0 8px 20px rgb(0 77 64 / 0.7);
+      font-weight: 700;
+      font-size: 1.1rem;
+      line-height: 1.5;
+    }
+    .highlight-box p {
+      margin-bottom: 0.8rem;
+    }
+    .highlight-box ul {
+        margin-right: 1.5rem;
+        margin-left: 0;
+    }
+    .example {
+      background: #b2dfdb;
+      border-radius: 12px;
+      padding: 1rem 1.2rem;
+      margin: 0.8rem 0 1.2rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+      color: #004d40;
+      box-shadow: inset 0 0 8px rgb(0 77 64 / 0.3);
+      line-height: 1.4;
+    }
+    .example-arab {
+      font-size: 1.4rem;
+      font-weight: 700;
+      direction: rtl;
+      margin-bottom: 0.3rem;
+      color: #00332f;
+    }
+    .example-tr {
+      font-style: italic;
+      color: #004d40;
+    }
+    /* Latihan (Tugas) */
+    .exercise-section {
+      margin-top: 3rem;
+    }
+    .exercise-section h2 {
+      margin-bottom: 1rem;
+    }
+    .assignment-box {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .assignment-box h3 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    
+    /* Learning Objectives */
+    .learning-objectives {
+        margin-bottom: 2rem;
+        background: #e0f2f1;
+        padding: 1.5rem 2rem;
+        border-radius: 10px;
+        border-right: 5px solid #004d40;
+    }
+    .learning-objectives ul {
+        list-style-type: '🎯';
+        padding-right: 1.5rem;
+        margin-bottom: 0;
+    }
+    .learning-objectives li {
+        padding-right: 0.5rem;
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+    .learning-objectives h3 {
+        margin-top: 0;
+    }
+    
+    /* Responsive */
+    @media (max-width: 600px) {
+      .intro {
+        flex-direction: column;
+        text-align: center;
+      }
+      .intro svg {
+        margin: 0 auto;
+      }
+    }
+  </style>
+ </head>
+ <body>
+  <h1>الدرس الثامن: النعت والبدل</h1>
+
+  <!-- Pendahuluan -->
+  <section class="intro" aria-label="Pendahuluan pelajaran">
+    <svg aria-hidden="true" focusable="false" viewBox="0 0 24 24">
+        <path d="M18 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM6 4h12v16H6V4z"/>
+        <path d="M8 8h8v2H8zM8 12h8v2H8zM8 16h5v2H8z" fill-opacity="0.3"/>
+    </svg>
+    <p class="intro-text">
+        <strong>Pengantar Jumlah Ismiyah dan Unsur Pelengkapnya</strong><br>
+        Sebelumnya kita telah mempelajari jumlah ismiyah (مبتدأ + خبر). Namun, sering kali dibutuhkan unsur pelengkap seperti <strong>Na‘at (sifat)</strong> dan <strong>Badal (pengganti)</strong> untuk memperjelas makna.
+    </p>
+  </section>
+
+  <!-- Tujuan Pembelajaran -->
+  <section class="learning-objectives" aria-label="Tujuan Pembelajaran">
+    <h3 style="color: #004d40;">Tujuan Pembelajaran</h3>
+    <p style="margin-bottom: 0.5rem;">Setelah mempelajari materi ini, mahasiswa diharapkan mampu:</p>
+    <ul>
+      <li>Menjelaskan konsep Na'at (sifat) dan aturannya.</li>
+      <li>Menjelaskan konsep Badal (pengganti) dan jenis-jenisnya.</li>
+      <li>Mengidentifikasi Na'at dan Badal dalam kalimat.</li>
+      <li>Menggunakan Na'at dan Badal dalam paragraf deskriptif (contoh: surat).</li>
+    </ul>
+  </section>
+
+  <!-- Mufrodat kosa-kata -->
+  <section aria-labelledby="mufrodat-title">
+    <h2 id="mufrodat-title">Kosakata: Menulis Surat kepada Teman</h2>
+    <h3>Isim (Benda/Tempat)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+          <th>Kata Arab</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>رِسَالَة</td><td>surat</td><td>صَدِيْق</td><td>teman (lk)</td></tr>
+        <tr><td>جَامِعَة</td><td>universitas</td><td>شَوْق</td><td>kerinduan</td></tr>
+        <tr><td>كَلِمَة</td><td>kata</td><td>جُمْلَة</td><td>kalimat</td></tr>
+        <tr><td>قَلْب</td><td>hati</td><td>فَرَح</td><td>kebahagiaan</td></tr>
+        <tr><td>صَدَاقَة</td><td>persahabatan</td><td>بَيْت</td><td>rumah</td></tr>
+      </tbody>
+    </table>
+    
+    <h3 style="margin-top: 2rem;">Fi‘il (Kata Kerja)</h3>
+    <table>
+      <thead>
+        <tr>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+          <th>Madhi - Mudhari'</th>
+          <th>Arti</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>كَتَبَ – يَكْتُبُ</td><td>menulis</td><td>أَرْسَلَ – يُرْسِلُ</td><td>mengirim</td></tr>
+        <tr><td>قَرَأَ – يَقْرَأُ</td><td>membaca</td><td>سَأَلَ – يَسْأَلُ</td><td>bertanya</td></tr>
+        <tr><td>تَذَكَّرَ – يَتَذَكَّرُ</td><td>mengingat</td><td>اِشْتَاقَ – يَشْتَاقُ</td><td>merindukan</td></tr>
+        <tr><td>أَحَبَّ – يُحِبُّ</td><td>mencintai</td><td>سَاعَدَ – يُسَاعِدُ</td><td>membantu</td></tr>
+        <tr><td>وَصَفَ – يَصِفُ</td><td>mendeskripsikan</td><td>فَكَّرَ – يُفَكِّرُ</td><td>berpikir</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- Konsep Na'at dan Badal -->
+  <section aria-labelledby="concept-title">
+    <h2 id="concept-title">Kaidah Pelengkap: Na‘at (النعت) dan Badal (البدل)</h2>
+    <div class="highlight-box" tabindex="0" aria-label="Penjelasan Na'at dan Badal">
+      <p><strong>1. Konsep Na‘at (النعت) - Sifat</strong></p>
+      <p>Na‘at adalah isim yang menjelaskan isim sebelumnya (Man‘ūt) dan harus mengikutinya dalam 4 hal:</p>
+        <ul style="list-style-type: circle;">
+            <li>Jenis (mużakkar / mu’annats)</li>
+            <li>Jumlah (mufrad / mutsanna / jamak)</li>
+            <li>I‘rab (rafa‘ / nashab / jar)</li>
+            <li>Ma‘rifah dan Nakirah</li>
+        </ul>
+      <p><strong>Contoh Na'at:</strong></p>
+      <div class="example" tabindex="0" aria-label="Contoh Na'at 1">
+        <p class="example-arab">الْمُوَظَّفُ النَّشِيْطُ فِي الْمَكْتَبِ.</p>
+        <p class="example-tr">(Pegawai yang rajin itu di kantor).</p>
+      </div>
+      <div class="example" tabindex="0" aria-label="Contoh Na'at 2">
+        <p class="example-arab">الطَّالِبَةُ الْمُجْتَهِدَةُ تَكْتُبُ الرِّسَالَةَ.</p>
+        <p class="example-tr">(Mahasiswi yang rajin itu menulis surat).</p>
+      </div>
+
+      <p><strong>2. Konsep Badal (البدل) - Pengganti</strong></p>
+      <p>Badal adalah kata benda yang menggantikan kata benda sebelumnya (Mubdal Minhu) untuk menegaskan atau menjelaskan makna yang dimaksud. I'rabnya mengikuti Mubdal Minhu.</p>
+      <p><strong>Jenis-Jenis Badal:</strong></p>
+        <ul style="list-style-type: circle;">
+            <li><strong>Badal Kullu min Kull (Keseluruhan):</strong><br>
+                <span class="example-arab" style="font-size: 1.2rem; display: block;">جَاءَ صَدِيْقِي أَحْمَدُ.</span>
+                (Temanku Ahmad datang).
+            </li>
+            <li><strong>Badal Ba‘ḍ min Kull (Sebagian):</strong><br>
+                <span class="example-arab" style="font-size: 1.2rem; display: block;">أَكَلْتُ التُّفَّاحَةَ نِصْفَهَا.</span>
+                (Aku memakan apel, setengahnya).
+            </li>
+            <li><strong>Badal Isytimāl (Makna Melekat):</strong><br>
+                <span class="example-arab" style="font-size: 1.2rem; display: block;">أَعْجَبَنِي الطَّالِبُ خُلُقُهُ.</span>
+                (Aku kagum pada mahasiswa itu, akhlaknya).
+            </li>
+        </ul>
+
+      <hr style="margin: 1.5rem 0; border-color: #00796b;" />
+
+      <p><strong>3. Contoh Paragraf Deskriptif (Surat)</strong></p>
+      <div class="example" tabindex="0" aria-label="Contoh Cerita Pendek">
+        <p class="example-arab" style="text-align: center; font-size: 1.5rem;">رِسَالَةٌ إِلَى صَدِيْقِي أَحْمَدَ</p>
+        <p class="example-arab">صَدِيْقِي أَحْمَدُ طَالِبٌ نَشِيْطٌ. هُوَ شَابٌّ مُبْتَسِمٌ وَمُؤَدَّبٌ. أَحْمَدُ، صَدِيْقِي الْقَدِيْمُ، يُحِبُّ الْقِرَاءَةَ. أَكْتُبُ لَهُ هٰذِهِ الرِّسَالَةَ لِأُعَبِّرَ عَنْ شَوْقِي إِلَيْهِ. الْيَوْمُ جَمِيْلٌ وَقَلْبِي سَعِيْدٌ لِأَنَّنِي أَكْتُبُ إِلَى صَدِيْقِي الْمُخْلِصِ.</p>
+        <p class="example-tr" style="text-align: justify;">(Temanku Ahmad adalah mahasiswa yang rajin. Dia pemuda yang murah senyum dan sopan. Ahmad, temanku yang lama, menyukai membaca. Aku menulis surat ini untuk mengungkapkan kerinduanku kepadanya. Hari ini indah dan hatiku bahagia karena aku menulis kepada temanku yang setia).</p>
+      </div>
+       <p style="font-size: 1rem; color: #b2dfdb;"><strong>Penjelasan Gramatikal:</strong><br>
+        <strong>Na'at:</strong> النَّشِيْطُ، مُبْتَسِمٌ، مُؤَدَّبٌ، الْقَدِيْمُ، الْمُخْلِصِ<br>
+        <strong>Badal:</strong> أَحْمَدُ (yang pertama), صَدِيْقِي (yang kedua)
+       </p>
+
+      <p><strong>4. Ringkasan Kaidah</strong></p>
+        <table style="font-size: 0.9rem;">
+            <thead>
+                <tr>
+                    <th>Unsur</th>
+                    <th>Ciri Utama</th>
+                    <th>Contoh</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Na‘at (sifat)</strong></td>
+                    <td>Menjelaskan isim sebelumnya dan mengikuti 4 hal (I'rab, Jenis, Jumlah, Ma'rifah/Nakirah)</td>
+                    <td>الطَّالِبُ <strong>الْمُجْتَهِدُ</strong></td>
+                </tr>
+                <tr>
+                    <td><strong>Badal (pengganti)</strong></td>
+                    <td>Menggantikan isim sebelumnya, I'rab sama</td>
+                    <td>صَدِيْقِي <strong>أَحْمَدُ</strong></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+  </section>
+
+    <!-- Tugas Penulisan -->
+    <section class="exercise-section" aria-label="Tugas Penulisan">
+      <h2>Tugas Penulisan</h2>
+      <div class="assignment-box" aria-labelledby="assignment-title">
+        <h3 id="assignment-title">✍️ Tugas: Menulis Surat Pendek</h3>
+        <p>Tulislah sebuah surat pendek (5–7 kalimat) kepada temanmu dalam bahasa Arab.</p>
+        <p>Gunakan minimal:</p>
+        <ul style="list-style-type: disc; margin-right: 1.5rem;">
+            <li>3 jumlah ismiyah (mubtada + khabar)</li>
+            <li>2 na‘at</li>
+            <li>1 badal</li>
+        </ul>
+        <p style="margin-top: 1.5rem;"><strong>Contoh Pembuka Surat:</strong></p>
+        <div classs="example" style="background: #e0f2f1; padding: 1rem; border-radius: 10px; color: #004d40; border: 1px solid #b2dfdb;">
+            <p class="example-arab" style="margin-bottom: 0;">صَدِيْقِي الْعَزِيْزُ، كَيْفَ حَالُكَ؟ أَكْتُبُ إِلَيْكَ هٰذِهِ الرِّسَالَةَ لِأُخْبِرَكَ عَنْ أَخْبَارِي...</p>
+        </div>
+      </div>
+    </section>
+
+ </body>
+ </html>
