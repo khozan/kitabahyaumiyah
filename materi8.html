@@ -136,23 +136,82 @@
       font-style: italic;
       color: #004d40;
     }
-    /* Latihan (Tugas) */
+    /* Latihan interaktif */
     .exercise-section {
       margin-top: 3rem;
     }
     .exercise-section h2 {
       margin-bottom: 1rem;
     }
-    .assignment-box {
+    .quiz {
       background: #fff;
       border-radius: 15px;
       padding: 1.5rem 2rem;
       box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
       margin-bottom: 2rem;
     }
-    .assignment-box h3 {
+    .quiz h3 {
       color: #00796b;
       margin-bottom: 1rem;
+    }
+    .quiz-question {
+      margin-bottom: 1rem;
+      font-weight: 600;
+      font-size: 1.1rem;
+    }
+    .options {
+      list-style: none;
+      padding: 0;
+      margin-top: 0.5rem;
+    }
+    .options li {
+      margin-bottom: 0.6rem;
+    }
+    .options label {
+      cursor: pointer;
+      user-select: none;
+      font-size: 1rem;
+      color: #1a1a1a;
+      background: #e0f2f1;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      display: block;
+      transition: background-color 0.3s ease;
+    }
+    .options input[type="radio"] {
+      display: none;
+    }
+    .options input[type="radio"]:checked + label {
+      background-color: #004d40;
+      color: #e0f2f1;
+      font-weight: 700;
+    }
+    button.check-btn {
+      margin-top: 1rem;
+      background: #004d40;
+      color: #e0f2f1;
+      border: none;
+      padding: 0.7rem 1.5rem;
+      border-radius: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+    button.check-btn:hover,
+    button.check-btn:focus {
+      background: #00332f;
+      outline: none;
+    }
+    .feedback {
+      margin-top: 0.8rem;
+      font-weight: 700;
+      font-size: 1rem;
+    }
+    .correct {
+      color: #2e7d32;
+    }
+    .wrong {
+      color: #c62828;
     }
     
     /* Learning Objectives */
@@ -175,6 +234,103 @@
     }
     .learning-objectives h3 {
         margin-top: 0;
+    }
+    
+    /* Drag & Drop Styles */
+    .dragdrop {
+      background: #fff;
+      border-radius: 15px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+      margin-bottom: 2rem;
+    }
+    .dragdrop h3 {
+      color: #00796b;
+      margin-bottom: 1rem;
+    }
+    .drop-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+    .sentence-part {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 1.2rem;
+      flex-wrap: wrap;
+    }
+    .drop-zone {
+      background: #e0f2f1;
+      border: 2px dashed #004d40;
+      border-radius: 12px;
+      min-width: 150px;
+      min-height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #004d40;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      font-weight: 700;
+    }
+    .drop-zone.drag-over {
+      background-color: #b2dfdb;
+    }
+    .drop-zone.filled {
+      border-style: solid;
+      background: #004d40;
+      color: #e0f2f1;
+    }
+    .drag-options {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      border-top: 2px solid #e0f2f1;
+      padding-top: 1.5rem;
+    }
+    .drag-item {
+      background: #b2dfdb;
+      border-radius: 12px;
+      padding: 0.8rem 1.5rem;
+      font-weight: 700;
+      font-size: 1.2rem;
+      color: #004d40;
+      user-select: none;
+      box-shadow: 0 4px 10px rgb(0 77 64 / 0.3);
+      cursor: grab;
+      transition: opacity 0.3s ease;
+    }
+    .drag-item:active {
+      cursor: grabbing;
+    }
+    .drag-item.hide {
+      opacity: 0.5;
+    }
+    .play-section {
+        text-align: center;
+        margin-top: 3rem;
+        background: #fff;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgb(0 0 0 / 0.1);
+    }
+    .play-btn {
+        background: linear-gradient(45deg, #00796b, #004d40);
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 700;
+        border: none;
+        padding: 1rem 2.5rem;
+        border-radius: 50px;
+        cursor: pointer;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        box-shadow: 0 4px 15px rgba(0, 121, 107, 0.4);
+    }
+    .play-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(0, 77, 64, 0.5);
     }
     
     /* Responsive */
@@ -308,7 +464,7 @@
       </div>
        <p style="font-size: 1rem; color: #b2dfdb;"><strong>Penjelasan Gramatikal:</strong><br>
         <strong>Na'at:</strong> النَّشِيْطُ، مُبْتَسِمٌ، مُؤَدَّبٌ، الْقَدِيْمُ، الْمُخْلِصِ<br>
-        <strong>Badal:</strong> أَحْمَدُ (yang pertama), صَدِيْقِي (yang kedua)
+        <strong>Badal:</strong> أَحْمَدُ (yang pertama), صَدِيْqِي (yang kedua)
        </p>
 
       <p><strong>4. Ringkasan Kaidah</strong></p>
@@ -336,24 +492,314 @@
     </div>
   </section>
 
-    <!-- Tugas Penulisan -->
-    <section class="exercise-section" aria-label="Tugas Penulisan">
-      <h2>Tugas Penulisan</h2>
-      <div class="assignment-box" aria-labelledby="assignment-title">
-        <h3 id="assignment-title">✍️ Tugas: Menulis Surat Pendek</h3>
-        <p>Tulislah sebuah surat pendek (5–7 kalimat) kepada temanmu dalam bahasa Arab.</p>
-        <p>Gunakan minimal:</p>
-        <ul style="list-style-type: disc; margin-right: 1.5rem;">
-            <li>3 jumlah ismiyah (mubtada + khabar)</li>
-            <li>2 na‘at</li>
-            <li>1 badal</li>
+    <!-- Latihan Interaktif (Menggantikan Tugas Penulisan) -->
+    <section class="exercise-section" aria-label="Latihan interaktif">
+      <h2>Latihan Penguatan</h2>
+      <div class="quiz" aria-labelledby="quiz1-title">
+        <h3 id="quiz1-title">Identifikasi Na'at (Sifat)</h3>
+        <div class="quiz-question" id="q1">1. Mana kata yang menjadi <em>Na'at</em> dalam kalimat "الطَّالِبَةُ الْمُجْتَهِدَةُ تَكْتُبُ الرِّسَالَةَ"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q1">
+          <li>
+            <input type="radio" id="q1a" name="q1" value="wrong" />
+            <label for="q1a">الطَّالِبَةُ</label>
+          </li>
+          <li>
+            <input type="radio" id="q1b" name="q1" value="correct" />
+            <label for="q1b">الْمُجْتَهِدَةُ</label>
+          </li>
+          <li>
+            <input type="radio" id="q1c" name="q1" value="wrong" />
+            <label for="q1c">تَكْتُبُ</label>
+          </li>
         </ul>
-        <p style="margin-top: 1.5rem;"><strong>Contoh Pembuka Surat:</strong></p>
-        <div classs="example" style="background: #e0f2f1; padding: 1rem; border-radius: 10px; color: #004d40; border: 1px solid #b2dfdb;">
-            <p class="example-arab" style="margin-bottom: 0;">صَدِيْقِي الْعَزِيْزُ، كَيْفَ حَالُكَ؟ أَكْتُبُ إِلَيْكَ هٰذِهِ الرِّسَالَةَ لِأُخْبِرَكَ عَنْ أَخْبَارِي...</p>
-        </div>
+        <button class="check-btn" onclick="checkQuiz('q1')">Periksa</button>
+        <div class="feedback" id="feedback-q1" aria-live="polite"></div>
       </div>
+      
+      <div class="quiz" aria-labelledby="quiz2-title">
+        <h3 id="quiz2-title">Identifikasi Badal (Pengganti)</h3>
+        <div class="quiz-question" id="q2">2. Mana kata yang menjadi <em>Badal</em> dalam kalimat "جَاءَ صَدِيْقِي أَحْمَدُ"?</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q2">
+          <li>
+            <input type="radio" id="q2a" name="q2" value="wrong" />
+            <label for="q2a">جَاءَ</label>
+          </li>
+          <li>
+            <input type="radio" id="q2b" name="q2" value="wrong" />
+            <label for="q2b">صَدِيْقِي</label>
+          </li>
+          <li>
+            <input type="radio" id="q2c" name="q2" value="correct" />
+            <label for="q2c">أَحْمَدُ</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q2')">Periksa</button>
+        <div class="feedback" id="feedback-q2" aria-live="polite"></div>
+      </div>
+      
+      <div class="quiz" aria-labelledby="quiz3-title">
+        <h3 id="quiz3-title">Jenis Badal</h3>
+        <div class="quiz-question" id="q3">3. "أَكَلْتُ التُّفَّاحَةَ نِصْفَهَا" (Aku makan apel, setengahnya). Ini adalah contoh dari...</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q3">
+          <li>
+            <input type="radio" id="q3a" name="q3" value="wrong" />
+            <label for="q3a">Badal Kullu min Kull (Keseluruhan)</label>
+          </li>
+          <li>
+            <input type="radio" id="q3b" name="q3" value="correct" />
+            <label for="q3b">Badal Ba'ḍ min Kull (Sebagian)</label>
+          </li>
+          <li>
+            <input type="radio" id="q3c" name="q3" value="wrong" />
+            <label for="q3c">Na'at</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q3')">Periksa</button>
+        <div class="feedback" id="feedback-q3" aria-live="polite"></div>
+      </div>
+      
+      <div class="quiz" aria-labelledby="quiz4-title">
+        <h3 id="quiz4-title">Aturan Na'at</h3>
+        <div class="quiz-question" id="q4">4. Na'at harus mengikuti Man'ut (yang disifati) dalam...</div>
+        <ul class="options" role="radiogroup" aria-labelledby="q4">
+          <li>
+            <input type="radio" id="q4a" name="q4" value="correct" />
+            <label for="q4a">4 hal (I'rab, Jenis, Jumlah, Ma'rifah/Nakirah)</label>
+          </li>
+          <li>
+            <input type="radio" id="q4b" name="q4" value="wrong" />
+            <label for="q4b">Hanya I'rab dan Jenis</label>
+          </li>
+          <li>
+            <input type="radio" id="q4c" name="q4" value="wrong" />
+            <label for="q4c">Hanya Jumlah</label>
+          </li>
+        </ul>
+        <button class="check-btn" onclick="checkQuiz('q4')">Periksa</button>
+        <div class="feedback" id="feedback-q4" aria-live="polite"></div>
+      </div>
+
+      <!-- Drag and Drop Exercise -->
+      <div class="dragdrop" aria-labelledby="dragdrop-title">
+        <h3 id="dragdrop-title">Latihan Drag & Drop: Pasangkan Na'at</h3>
+        <p style="text-align: center; font-weight: 600; color: #004d40;">Pasangkan Man'ut (Isim) dengan Na'at (Sifat) yang benar:</p>
+        <div class="drop-container">
+            <div class="sentence-part">الْمُوَظَّفُ <div class="drop-zone" data-correct="النَّشِيْطُ"></div></div>
+            <div class="sentence-part">الطَّالِبَةُ <div class="drop-zone" data-correct="الْمُجْتَهِدَةُ"></div></div>
+            <div class="sentence-part">الْمُدِيْرُ <div class="drop-zone" data-correct="الْعَادِلُ"></div></div>
+        </div>
+        <div class="drag-options">
+            <div class="drag-item" draggable="true">الْمُجْتَهِدَةُ</div>
+            <div class="drag-item" draggable="true">النَّشِيْطُ</div>
+            <div class="drag-item" draggable="true">الْعَادِلُ</div>
+        </div>
+        <div style="text-align: center;">
+            <button class="check-btn" onclick="checkDragDrop()">Periksa Jawaban</button>
+        </div>
+        <div class="feedback" id="feedback-dragdrop" aria-live="polite" style="text-align: center;"></div>
+      </div>
+
     </section>
+
+    <!-- Evaluasi Akhir -->
+     <section class="final-quiz" aria-label="Evaluasi akhir">
+       <h2>التقييم النهائي: اختبار فهم النعت والبدل</h2>
+       <form id="finalQuizForm" aria-describedby="finalQuizDesc">
+         <p id="finalQuizDesc">أجب عن الأسئلة التالية لاختبار مدى فهمك.</p>
+         <ol style="list-style-type: decimal; padding-right: 20px;">
+           <li style="margin-bottom: 1rem;">
+             <p>ما هو النعت؟</p>
+             <label><input type="radio" name="qf1" value="correct" required /> اسم يوضح صفة الاسم الذي قبله (المنعوت)</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> اسم يحل محل الاسم الذي قبله</label><br />
+             <label><input type="radio" name="qf1" value="wrong" /> المبتدأ في الجملة الاسمية</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>ما هو البدل؟</p>
+             <label><input type="radio" name="qf2" value="wrong" required /> اسم يوضح صفة الاسم الذي قبله</label><br />
+             <label><input type="radio" name="qf2" value="correct" /> اسم يحل محل الاسم الذي قبله (المبدل منه) لتوضيحه</label><br />
+             <label><input type="radio" name="qf2" value="wrong" /> الخبر في الجملة الاسمية</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "الطَّالِبُ الْمُجْتَهِدُ"، أي كلمة هي النعت؟</p>
+             <label><input type="radio" name="qf3" value="wrong" required /> الطَّالِبُ</label><br />
+             <label><input type="radio" name="qf3" value="correct" /> الْمُجْتَهِدُ</label><br />
+           </a>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>في جملة "جَاءَ صَدِيْقِي أَحْمَدُ"، أي كلمة هي البدل؟</p>
+             <label><input type="radio" name="qf4" value="correct" required /> أَحْمَدُ</label><br />
+             <label><input type="radio" name="qf4" value="wrong" /> صَدِيْقِي</label><br />
+             <label><input type="radio" name="qf4" value="wrong" /> جَاءَ</label>
+           </li>
+           <li style="margin-bottom: 1rem;">
+             <p>ما نوع البدل في "أَعْجَبَنِي الطَّالِبُ خُلُقُهُ" (أخلاقه)؟</p>
+             <label><input type="radio" name="qf5" value="wrong" /> بدل كل من كل</label><br />
+             <label><input type="radio" name="qf5" value="wrong" /> بدل بعض من كل</label><br />
+ V           <label><input type="radio" name="qf5" value="correct" /> بدل اشتمال</label>
+           </li>
+         </ol>
+         <button type="submit" class="check-btn">إرسال الإجابات</button>
+         <div id="finalScore" class="score" aria-live="polite" style="margin-top:1rem; font-weight:700; font-size:1.2rem;"></div>
+       </form>
+     </section>
+     
+    <!-- Tombol Latihan Bermain -->
+    <section class="play-section" aria-label="Latihan Bermain">
+        <h2>Ingin Latihan Lebih Seru?</h2>
+        <p>Uji pemahamanmu tentang Na'at dan Badal melalui permainan interaktif!</p>
+        <button class="play-btn" onclick="alert('Fitur permainan akan segera hadir!')">▶️ Mulai Bermain & Berlatih</button>
+    </section>
+
+  <script>
+    // Quiz check function
+    function checkQuiz(qname) {
+      const options = document.getElementsByName(qname);
+      let selected = null;
+      for (const opt of options) {
+        if (opt.checked) {
+          selected = opt;
+          break;
+        }
+      }
+      const feedback = document.getElementById('feedback-' + qname);
+      if (!selected) {
+        feedback.textContent = 'Silakan pilih jawaban.';
+        feedback.className = 'feedback wrong';
+        return;
+      }
+      if (selected.value === 'correct') {
+        feedback.textContent = 'Jawaban benar! ✅';
+        feedback.className = 'feedback correct';
+      } else {
+        feedback.textContent = 'Jawaban salah. Coba lagi.';
+        feedback.className = 'feedback wrong';
+      }
+    }
+
+    // Drag & Drop logic
+    let draggedItem = null;
+
+    function initializeDragDrop() {
+        const items = document.querySelectorAll('.drag-item');
+        const zones = document.querySelectorAll('.drop-zone');
+
+        items.forEach(item => {
+            addDragEvents(item);
+        });
+
+        zones.forEach(zone => {
+            zone.addEventListener('dragover', function(e) {
+                e.preventDefault();
+                this.classList.add('drag-over');
+            });
+            zone.addEventListener('dragleave', function() {
+                this.classList.remove('drag-over');
+            });
+            zone.addEventListener('drop', function(e) {
+                e.preventDefault();
+                this.classList.remove('drag-over');
+                if (draggedItem) {
+                    // if the drop zone is already filled, move the text back to options
+                    if (this.textContent !== '' && this.textContent !== draggedItem.textContent) {
+                        const originalItem = document.createElement('div');
+                        originalItem.classList.add('drag-item');
+                        originalItem.setAttribute('draggable', 'true');
+                        originalItem.textContent = this.textContent;
+                        document.querySelector('.drag-options').appendChild(originalItem);
+                        addDragEvents(originalItem);
+                    }
+                    this.textContent = draggedItem.textContent;
+                    this.classList.add('filled');
+                    
+                    // Only remove if it was dragged from the options
+                    if (draggedItem.parentElement.classList.contains('drag-options')) {
+                         draggedItem.remove();
+                    } else {
+                        // if dragged from another zone, clear the other zone
+                        if (draggedItem.parentElement.classList.contains('drop-zone')) {
+                            draggedItem.parentElement.textContent = '';
+                            draggedItem.parentElement.classList.remove('filled');
+                        }
+                    }
+                    draggedItem = null;
+                }
+            });
+        });
+    }
+    
+    function addDragEvents(item){
+        item.addEventListener('dragstart', function() {
+            draggedItem = this;
+            setTimeout(() => {
+                if(item.parentElement.classList.contains('drag-options')) {
+                    item.classList.add('hide');
+                }
+            }, 0);
+        });
+        item.addEventListener('dragend', function() {
+            item.classList.remove('hide');
+        });
+    }
+
+    function checkDragDrop() {
+        const feedback = document.getElementById('feedback-dragdrop');
+        let correctCount = 0;
+        const zones = document.querySelectorAll('.drop-zone');
+        const totalZones = zones.length;
+        
+        zones.forEach(zone => {
+            const correctText = zone.getAttribute('data-correct');
+            if (zone.textContent.trim() === correctText) {
+                zone.style.borderColor = '#2e7d32';
+                correctCount++;
+            } else {
+                zone.style.borderColor = '#c62828';
+            }
+        });
+
+        if (correctCount === totalZones) {
+            feedback.textContent = 'Jawaban benar semua! Luar biasa! ✅';
+            feedback.className = 'feedback correct';
+        } else {
+            feedback.textContent = `Ada ${correctCount} dari ${totalZones} jawaban yang benar. Coba perbaiki.`;
+            feedback.className = 'feedback wrong';
+        }
+    }
+    
+    // Initialize drag and drop
+    initializeDragDrop();
+
+
+    // Final quiz submission
+    document.getElementById('finalQuizForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const form = e.target;
+      const totalQuestions = 5;
+      let score = 0;
+      for (let i = 1; i <= totalQuestions; i++) {
+        const qName = 'qf' + i;
+        const options = form.elements[qName];
+        if (options) {
+             for (const opt of options) {
+                if (opt.checked && opt.value === 'correct') {
+                    score++;
+                }
+            }
+        }
+      }
+      const scoreDiv = document.getElementById('finalScore');
+      scoreDiv.textContent = `Skor Anda: ${score} dari ${totalQuestions} (${Math.round((score/totalQuestions)*100)}%)`;
+      if(score === totalQuestions) {
+        scoreDiv.style.color = '#2e7d32';
+      } else if(score >= totalQuestions/2) {
+        scoreDiv.style.color = '#f9a825';
+      } else {
+        scoreDiv.style.color = '#c62828';
+      }
+      scoreDiv.scrollIntoView({behavior: 'smooth'});
+    });
+  </script>
 
  </body>
  </html>
+
